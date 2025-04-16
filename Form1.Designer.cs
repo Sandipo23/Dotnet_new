@@ -45,6 +45,7 @@
             lblFirstNameError = new Label();
             label5 = new Label();
             btnCancel = new Button();
+            label3 = new Label();
             SuspendLayout();
             // 
             // cmbCourse
@@ -222,6 +223,19 @@
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancel_Click;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 11F);
+            label3.ForeColor = Color.Red;
+            label3.Location = new Point(326, 185);
+            label3.Name = "label3";
+            label3.Size = new Size(170, 20);
+            label3.TabIndex = 1007;
+            label3.Text = "Course must be selected";
+            label3.Visible = false;
+            label3.Click += lblLastNameError_Click;
+            // 
             // StudentForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -240,6 +254,7 @@
             Controls.Add(lblGender);
             Controls.Add(lblFee);
             Controls.Add(lblFullName);
+            Controls.Add(label3);
             Controls.Add(lblLastNameError);
             Controls.Add(label2);
             Controls.Add(lblFirstNameError);
@@ -270,5 +285,6 @@
         private Label lblFirstNameError;
         private Label label5;
         private Button btnCancel;
+        private Label label3;
     }
 }
