@@ -46,14 +46,14 @@
             label5 = new Label();
             btnCancel = new Button();
             lblCourseError = new Label();
-            checkBox1 = new CheckBox();
-            label4 = new Label();
+            chkAgree = new CheckBox();
+            lblAgreeError = new Label();
             SuspendLayout();
             // 
             // cmbCourse
             // 
             cmbCourse.FormattingEnabled = true;
-            cmbCourse.Location = new Point(140, 197);
+            cmbCourse.Location = new Point(140, 205);
             cmbCourse.Name = "cmbCourse";
             cmbCourse.Size = new Size(154, 23);
             cmbCourse.TabIndex = 2;
@@ -62,7 +62,7 @@
             // rbFemale
             // 
             rbFemale.AutoSize = true;
-            rbFemale.Location = new Point(206, 166);
+            rbFemale.Location = new Point(209, 170);
             rbFemale.Name = "rbFemale";
             rbFemale.Size = new Size(57, 19);
             rbFemale.TabIndex = 1022;
@@ -74,7 +74,7 @@
             // rbMale
             // 
             rbMale.AutoSize = true;
-            rbMale.Location = new Point(137, 166);
+            rbMale.Location = new Point(140, 170);
             rbMale.Name = "rbMale";
             rbMale.Size = new Size(51, 19);
             rbMale.TabIndex = 1021;
@@ -132,7 +132,7 @@
             // 
             txtCourse.AutoSize = true;
             txtCourse.Font = new Font("Segoe UI", 11F);
-            txtCourse.Location = new Point(39, 196);
+            txtCourse.Location = new Point(39, 204);
             txtCourse.Name = "txtCourse";
             txtCourse.Size = new Size(54, 20);
             txtCourse.TabIndex = 1011;
@@ -142,7 +142,7 @@
             // 
             lblGender.AutoSize = true;
             lblGender.Font = new Font("Segoe UI", 11F);
-            lblGender.Location = new Point(39, 166);
+            lblGender.Location = new Point(42, 170);
             lblGender.Name = "lblGender";
             lblGender.Size = new Size(57, 20);
             lblGender.TabIndex = 1010;
@@ -230,7 +230,7 @@
             lblCourseError.AutoSize = true;
             lblCourseError.Font = new Font("Segoe UI", 11F);
             lblCourseError.ForeColor = Color.Red;
-            lblCourseError.Location = new Point(326, 200);
+            lblCourseError.Location = new Point(326, 208);
             lblCourseError.Name = "lblCourseError";
             lblCourseError.Size = new Size(170, 20);
             lblCourseError.TabIndex = 1007;
@@ -238,32 +238,36 @@
             lblCourseError.Visible = false;
             lblCourseError.Click += lblLastNameError_Click;
             // 
-            // checkBox1
+            // chkAgree
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(140, 247);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(82, 19);
-            checkBox1.TabIndex = 1024;
-            checkBox1.Text = "checkBox1";
-            checkBox1.UseVisualStyleBackColor = true;
+            chkAgree.AutoSize = true;
+            chkAgree.Location = new Point(140, 247);
+            chkAgree.Name = "chkAgree";
+            chkAgree.Size = new Size(176, 19);
+            chkAgree.TabIndex = 1024;
+            chkAgree.Text = "I agree terms and conditions";
+            chkAgree.UseVisualStyleBackColor = true;
+            chkAgree.CheckedChanged += chkAgree_CheckedChanged;
             // 
-            // label4
+            // lblAgreeError
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(48, 248);
-            label4.Name = "label4";
-            label4.Size = new Size(38, 15);
-            label4.TabIndex = 1025;
-            label4.Text = "label4";
+            lblAgreeError.AutoSize = true;
+            lblAgreeError.Font = new Font("Segoe UI", 11F);
+            lblAgreeError.ForeColor = Color.Red;
+            lblAgreeError.Location = new Point(326, 244);
+            lblAgreeError.Name = "lblAgreeError";
+            lblAgreeError.Size = new Size(251, 20);
+            lblAgreeError.TabIndex = 1007;
+            lblAgreeError.Text = "must agree the terms and conditions";
+            lblAgreeError.Visible = false;
+            lblAgreeError.Click += lblLastNameError_Click;
             // 
             // StudentForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(label4);
-            Controls.Add(checkBox1);
+            Controls.Add(chkAgree);
             Controls.Add(btnCancel);
             Controls.Add(cmbCourse);
             Controls.Add(rbFemale);
@@ -277,6 +281,7 @@
             Controls.Add(lblGender);
             Controls.Add(lblFee);
             Controls.Add(lblFullName);
+            Controls.Add(lblAgreeError);
             Controls.Add(lblCourseError);
             Controls.Add(lblLastNameError);
             Controls.Add(lblLastName);
@@ -310,7 +315,7 @@
         private Label label5;
         private Button btnCancel;
         private Label lblCourseError;
-        private CheckBox checkBox1;
-        private Label label4;
+        private CheckBox chkAgree;
+        private Label lblAgreeError;
     }
 }

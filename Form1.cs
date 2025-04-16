@@ -7,7 +7,7 @@ namespace WinFormsApp1
             InitializeComponent();
             InitializeFormComponent();
 
-            LoadCourses();
+            LoadCourses();    // this is for array og course
         }
 
         private void InitializeFormComponent()
@@ -44,7 +44,7 @@ namespace WinFormsApp1
             // 4th syntax
             cmbCourse.Items.AddRange(courses);    // Addrange can take object of array
 
-            cmbCourse.SelectedIndex = 0;
+            cmbCourse.SelectedIndex = 0;  // selecting the index 0 i.e please select the course
         }
 
         private void txtFirstName_TextChanged(object sender, EventArgs e)
@@ -116,6 +116,7 @@ namespace WinFormsApp1
             string lastName = txtLastName.Text.Trim();
             bool gender = rbMale.Checked;
             string course = cmbCourse.Text;
+            bool agree = chkAgree.Checked;
 
             if (String.IsNullOrEmpty(firstName))
             {
@@ -143,8 +144,16 @@ namespace WinFormsApp1
             {
                 lblCourseError.Visible = false;
             }
+            if (!agree)
+            {
+                lblAgreeError.Visible = true;
+            }
+            else
+            {
+                lblAgreeError.Visible = false;
+            }
 
-            if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName) && cmbCourse.SelectedIndex > 0)
+            if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName) && cmbCourse.SelectedIndex > 0 && agree)
             {
                 MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ResetControls();
@@ -176,6 +185,14 @@ namespace WinFormsApp1
 
         private void StudentForm_Load(object sender, EventArgs e)
         {
+        }
+
+        private void chkAgree_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAgree.Checked)   // this is for immediate click and error message hide
+            {
+                lblAgreeError.Visible = false;
+            }
         }
     }
 }
