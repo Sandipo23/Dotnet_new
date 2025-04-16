@@ -5,14 +5,16 @@ namespace WinFormsApp1
         public StudentForm()
         {
             InitializeComponent();
-            InitializeComponent();
+            InitializeFormComponent();
+
             LoadCourses();
         }
 
         private void InitializeFormComponent()
         {
             txtFee.ReadOnly = true;
-            txtFee.Text = "15000";
+            txtFee.Text = "35000";
+            txtFee.Enabled = false;
             rbMale.Checked = true;
         }
 
@@ -47,14 +49,24 @@ namespace WinFormsApp1
 
         private void txtFirstName_TextChanged(object sender, EventArgs e)
         {
+            SetFullName();
         }
 
         private void txtLastName_TextChanged(object sender, EventArgs e)
         {
+            SetFullName();
         }
 
         private void txtFullName_TextChanged(object sender, EventArgs e)
         {
+        }
+
+        private void SetFullName()
+        {
+            string firstName = txtFirstName.Text;
+            string lastName = txtLastName.Text;
+            string fullName = firstName + " " + lastName;
+            txtFullName.Text = fullName;
         }
 
         private void txtFee_TextChanged(object sender, EventArgs e)
@@ -73,12 +85,38 @@ namespace WinFormsApp1
         {
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
+            Save();
+            ResetControls();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
+            ResetControls();
+        }
+
+        private void Save()
+        {
+            string firstName = txtFirstName.Text.Trim();
+            string lastName = txtLastName.Text.Trim();
+
+            if (String.IsNullOrEmpty(firstName) || String.IsNullOrEmpty(lastName))
+            {
+                MessageBox.Show("First name and last name is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                // call database()
+                MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void ResetControls()
+        {
+            txtFirstName.Clear();
+            txtLastName.Clear();
+            txtFirstName.Focus();
         }
 
         private void lblFirstNameError_Click(object sender, EventArgs e)

@@ -31,9 +31,6 @@
             cmbCourse = new ComboBox();
             rbFemale = new RadioButton();
             rbMale = new RadioButton();
-            button2 = new Button();
-            btnCancel = new Button();
-            button1 = new Button();
             btnSave = new Button();
             txtFee = new TextBox();
             txtFullName = new TextBox();
@@ -47,6 +44,7 @@
             label2 = new Label();
             lblFirstNameError = new Label();
             label5 = new Label();
+            btnCancel = new Button();
             SuspendLayout();
             // 
             // cmbCourse
@@ -55,7 +53,7 @@
             cmbCourse.Location = new Point(140, 182);
             cmbCourse.Name = "cmbCourse";
             cmbCourse.Size = new Size(154, 23);
-            cmbCourse.TabIndex = 1023;
+            cmbCourse.TabIndex = 2;
             cmbCourse.SelectedIndexChanged += cmbCourse_SelectedIndexChanged;
             // 
             // rbFemale
@@ -82,35 +80,6 @@
             rbMale.UseVisualStyleBackColor = true;
             rbMale.CheckedChanged += rbMale_CheckedChanged;
             // 
-            // button2
-            // 
-            button2.Location = new Point(288, 229);
-            button2.Name = "button2";
-            button2.Size = new Size(138, 39);
-            button2.TabIndex = 1018;
-            button2.Text = "Cancel";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
-            // 
-            // btnCancel
-            // 
-            btnCancel.Location = new Point(288, 229);
-            btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(138, 39);
-            btnCancel.TabIndex = 1017;
-            btnCancel.Text = "Cancel";
-            btnCancel.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(140, 229);
-            button1.Name = "button1";
-            button1.Size = new Size(126, 39);
-            button1.TabIndex = 1016;
-            button1.Text = "Save";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
             // btnSave
             // 
             btnSave.Location = new Point(140, 229);
@@ -119,6 +88,7 @@
             btnSave.TabIndex = 1015;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // txtFee
             // 
@@ -242,17 +212,25 @@
             label5.TabIndex = 1005;
             label5.Text = "First Name";
             // 
+            // btnCancel
+            // 
+            btnCancel.Location = new Point(285, 229);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(109, 39);
+            btnCancel.TabIndex = 1023;
+            btnCancel.Text = "Cancel";
+            btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click;
+            // 
             // StudentForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnCancel);
             Controls.Add(cmbCourse);
             Controls.Add(rbFemale);
             Controls.Add(rbMale);
-            Controls.Add(button2);
-            Controls.Add(btnCancel);
-            Controls.Add(button1);
             Controls.Add(btnSave);
             Controls.Add(txtFee);
             Controls.Add(txtFullName);
@@ -277,9 +255,7 @@
         private ComboBox cmbCourse;
         private RadioButton rbFemale;
         private RadioButton rbMale;
-        private Button button2;
-        private Button btnCancel;
-        private Button button1;
+       
         private Button btnSave;
         private TextBox txtFee;
         private TextBox txtFullName;
@@ -293,5 +269,6 @@
         private Label label2;
         private Label lblFirstNameError;
         private Label label5;
+        private Button btnCancel;
     }
 }
