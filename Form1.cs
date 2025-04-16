@@ -49,11 +49,20 @@ namespace WinFormsApp1
 
         private void txtFirstName_TextChanged(object sender, EventArgs e)
         {
+            if (!String.IsNullOrEmpty(txtFirstName.Text.Trim()))   // this is for removing error message when user enters the box
+            {
+                lblFirstNameError.Visible = false;
+            }
             SetFullName();
         }
 
         private void txtLastName_TextChanged(object sender, EventArgs e)
         {
+            if (!String.IsNullOrEmpty(txtLastName.Text.Trim()))   // this is for removing error message when user enters the box
+            {
+                lblLastNameError.Visible = false;
+            }
+
             SetFullName();
         }
 
@@ -82,13 +91,18 @@ namespace WinFormsApp1
         }
 
         private void cmbCourse_SelectedIndexChanged(object sender, EventArgs e)
+
         {
+            if (cmbCourse.SelectedIndex > 0)
+            {
+                lblCourseError.Visible = false;
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             Save();
-            ResetControls();
+            // ResetControls();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -100,15 +114,40 @@ namespace WinFormsApp1
         {
             string firstName = txtFirstName.Text.Trim();
             string lastName = txtLastName.Text.Trim();
+            bool gender = rbMale.Checked;
+            string course = cmbCourse.Text;
 
-            if (String.IsNullOrEmpty(firstName) || String.IsNullOrEmpty(lastName))
+            if (String.IsNullOrEmpty(firstName))
             {
-                MessageBox.Show("First name and last name is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblFirstNameError.Visible = true;
             }
             else
             {
-                // call database()
+                lblFirstNameError.Visible = false;
+            }
+
+            if (String.IsNullOrEmpty(lastName))
+            {
+                lblLastNameError.Visible = true;
+            }
+            else
+            {
+                lblLastNameError.Visible = false;
+            }
+
+            if (cmbCourse.SelectedIndex == 0)
+            {
+                lblCourseError.Visible = true;
+            }
+            else
+            {
+                lblCourseError.Visible = false;
+            }
+
+            if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName) && cmbCourse.SelectedIndex > 0)
+            {
                 MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ResetControls();
             }
         }
 
@@ -119,11 +158,23 @@ namespace WinFormsApp1
             txtFirstName.Focus();
         }
 
+        //private void cmbCourse_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    if (cmbCourse.SelectedIndex > 0)
+        //    {
+        //        lblCourseError.Visible = false;
+        //    }
+        //}
+
         private void lblFirstNameError_Click(object sender, EventArgs e)
         {
         }
 
         private void lblLastNameError_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void StudentForm_Load(object sender, EventArgs e)
         {
         }
     }

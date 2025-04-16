@@ -36,22 +36,24 @@
             txtFullName = new TextBox();
             txtLastName = new TextBox();
             txtFirstName = new TextBox();
-            label1 = new Label();
+            txtCourse = new Label();
             lblGender = new Label();
             lblFee = new Label();
             lblFullName = new Label();
             lblLastNameError = new Label();
-            label2 = new Label();
+            lblLastName = new Label();
             lblFirstNameError = new Label();
             label5 = new Label();
             btnCancel = new Button();
-            label3 = new Label();
+            lblCourseError = new Label();
+            checkBox1 = new CheckBox();
+            label4 = new Label();
             SuspendLayout();
             // 
             // cmbCourse
             // 
             cmbCourse.FormattingEnabled = true;
-            cmbCourse.Location = new Point(140, 182);
+            cmbCourse.Location = new Point(140, 197);
             cmbCourse.Name = "cmbCourse";
             cmbCourse.Size = new Size(154, 23);
             cmbCourse.TabIndex = 2;
@@ -60,7 +62,7 @@
             // rbFemale
             // 
             rbFemale.AutoSize = true;
-            rbFemale.Location = new Point(206, 151);
+            rbFemale.Location = new Point(206, 166);
             rbFemale.Name = "rbFemale";
             rbFemale.Size = new Size(57, 19);
             rbFemale.TabIndex = 1022;
@@ -72,7 +74,7 @@
             // rbMale
             // 
             rbMale.AutoSize = true;
-            rbMale.Location = new Point(137, 151);
+            rbMale.Location = new Point(137, 166);
             rbMale.Name = "rbMale";
             rbMale.Size = new Size(51, 19);
             rbMale.TabIndex = 1021;
@@ -83,7 +85,7 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(140, 229);
+            btnSave.Location = new Point(140, 296);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(126, 39);
             btnSave.TabIndex = 1015;
@@ -93,7 +95,7 @@
             // 
             // txtFee
             // 
-            txtFee.Location = new Point(137, 112);
+            txtFee.Location = new Point(137, 131);
             txtFee.Name = "txtFee";
             txtFee.ReadOnly = true;
             txtFee.Size = new Size(157, 23);
@@ -126,21 +128,21 @@
             txtFirstName.TabIndex = 1012;
             txtFirstName.TextChanged += txtFirstName_TextChanged;
             // 
-            // label1
+            // txtCourse
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 11F);
-            label1.Location = new Point(39, 181);
-            label1.Name = "label1";
-            label1.Size = new Size(54, 20);
-            label1.TabIndex = 1011;
-            label1.Text = "Course";
+            txtCourse.AutoSize = true;
+            txtCourse.Font = new Font("Segoe UI", 11F);
+            txtCourse.Location = new Point(39, 196);
+            txtCourse.Name = "txtCourse";
+            txtCourse.Size = new Size(54, 20);
+            txtCourse.TabIndex = 1011;
+            txtCourse.Text = "Course";
             // 
             // lblGender
             // 
             lblGender.AutoSize = true;
             lblGender.Font = new Font("Segoe UI", 11F);
-            lblGender.Location = new Point(39, 151);
+            lblGender.Location = new Point(39, 166);
             lblGender.Name = "lblGender";
             lblGender.Size = new Size(57, 20);
             lblGender.TabIndex = 1010;
@@ -150,7 +152,7 @@
             // 
             lblFee.AutoSize = true;
             lblFee.Font = new Font("Segoe UI", 11F);
-            lblFee.Location = new Point(39, 119);
+            lblFee.Location = new Point(39, 131);
             lblFee.Name = "lblFee";
             lblFee.Size = new Size(87, 20);
             lblFee.TabIndex = 1009;
@@ -179,15 +181,15 @@
             lblLastNameError.Visible = false;
             lblLastNameError.Click += lblLastNameError_Click;
             // 
-            // label2
+            // lblLastName
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 11F);
-            label2.Location = new Point(39, 57);
-            label2.Name = "label2";
-            label2.Size = new Size(79, 20);
-            label2.TabIndex = 1006;
-            label2.Text = "Last Name";
+            lblLastName.AutoSize = true;
+            lblLastName.Font = new Font("Segoe UI", 11F);
+            lblLastName.Location = new Point(39, 57);
+            lblLastName.Name = "lblLastName";
+            lblLastName.Size = new Size(79, 20);
+            lblLastName.TabIndex = 1006;
+            lblLastName.Text = "Last Name";
             // 
             // lblFirstNameError
             // 
@@ -215,7 +217,7 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(285, 229);
+            btnCancel.Location = new Point(285, 296);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(109, 39);
             btnCancel.TabIndex = 1023;
@@ -223,24 +225,45 @@
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancel_Click;
             // 
-            // label3
+            // lblCourseError
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 11F);
-            label3.ForeColor = Color.Red;
-            label3.Location = new Point(326, 185);
-            label3.Name = "label3";
-            label3.Size = new Size(170, 20);
-            label3.TabIndex = 1007;
-            label3.Text = "Course must be selected";
-            label3.Visible = false;
-            label3.Click += lblLastNameError_Click;
+            lblCourseError.AutoSize = true;
+            lblCourseError.Font = new Font("Segoe UI", 11F);
+            lblCourseError.ForeColor = Color.Red;
+            lblCourseError.Location = new Point(326, 200);
+            lblCourseError.Name = "lblCourseError";
+            lblCourseError.Size = new Size(170, 20);
+            lblCourseError.TabIndex = 1007;
+            lblCourseError.Text = "Course must be selected";
+            lblCourseError.Visible = false;
+            lblCourseError.Click += lblLastNameError_Click;
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(140, 247);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(82, 19);
+            checkBox1.TabIndex = 1024;
+            checkBox1.Text = "checkBox1";
+            checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(48, 248);
+            label4.Name = "label4";
+            label4.Size = new Size(38, 15);
+            label4.TabIndex = 1025;
+            label4.Text = "label4";
             // 
             // StudentForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label4);
+            Controls.Add(checkBox1);
             Controls.Add(btnCancel);
             Controls.Add(cmbCourse);
             Controls.Add(rbFemale);
@@ -250,17 +273,18 @@
             Controls.Add(txtFullName);
             Controls.Add(txtLastName);
             Controls.Add(txtFirstName);
-            Controls.Add(label1);
+            Controls.Add(txtCourse);
             Controls.Add(lblGender);
             Controls.Add(lblFee);
             Controls.Add(lblFullName);
-            Controls.Add(label3);
+            Controls.Add(lblCourseError);
             Controls.Add(lblLastNameError);
-            Controls.Add(label2);
+            Controls.Add(lblLastName);
             Controls.Add(lblFirstNameError);
             Controls.Add(label5);
             Name = "StudentForm";
             Text = "Student Form";
+            Load += StudentForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -276,15 +300,17 @@
         private TextBox txtFullName;
         private TextBox txtLastName;
         private TextBox txtFirstName;
-        private Label label1;
+        private Label txtCourse;
         private Label lblGender;
         private Label lblFee;
         private Label lblFullName;
         private Label lblLastNameError;
-        private Label label2;
+        private Label lblLastName;
         private Label lblFirstNameError;
         private Label label5;
         private Button btnCancel;
-        private Label label3;
+        private Label lblCourseError;
+        private CheckBox checkBox1;
+        private Label label4;
     }
 }
