@@ -48,6 +48,12 @@
             lblCourseError = new Label();
             chkAgree = new CheckBox();
             lblAgreeError = new Label();
+            pbStudent = new PictureBox();
+            btnUpload = new Button();
+            btnRemove = new Button();
+            txtImage = new TextBox();
+            openFileDialog1 = new OpenFileDialog();
+            ((System.ComponentModel.ISupportInitialize)pbStudent).BeginInit();
             SuspendLayout();
             // 
             // cmbCourse
@@ -262,11 +268,54 @@
             lblAgreeError.Visible = false;
             lblAgreeError.Click += lblLastNameError_Click;
             // 
+            // pbStudent
+            // 
+            pbStudent.Location = new Point(619, 27);
+            pbStudent.Name = "pbStudent";
+            pbStudent.Size = new Size(143, 124);
+            pbStudent.TabIndex = 1025;
+            pbStudent.TabStop = false;
+            // 
+            // btnUpload
+            // 
+            btnUpload.Location = new Point(595, 201);
+            btnUpload.Name = "btnUpload";
+            btnUpload.Size = new Size(88, 27);
+            btnUpload.TabIndex = 1026;
+            btnUpload.Text = "Upload";
+            btnUpload.UseVisualStyleBackColor = true;
+            btnUpload.Click += btnUpload_Click;
+            // 
+            // btnRemove
+            // 
+            btnRemove.Location = new Point(689, 201);
+            btnRemove.Name = "btnRemove";
+            btnRemove.Size = new Size(82, 27);
+            btnRemove.TabIndex = 1027;
+            btnRemove.Text = "Remove";
+            btnRemove.UseVisualStyleBackColor = true;
+            btnRemove.Click += btnRemove_Click_1;
+            // 
+            // txtImage
+            // 
+            txtImage.Location = new Point(604, 166);
+            txtImage.Name = "txtImage";
+            txtImage.Size = new Size(167, 23);
+            txtImage.TabIndex = 1028;
+            // 
+            // openFileDialog1
+            // 
+            openFileDialog1.FileName = "openFileDialog1";
+            // 
             // StudentForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(txtImage);
+            Controls.Add(btnRemove);
+            Controls.Add(btnUpload);
+            Controls.Add(pbStudent);
             Controls.Add(chkAgree);
             Controls.Add(btnCancel);
             Controls.Add(cmbCourse);
@@ -290,6 +339,7 @@
             Name = "StudentForm";
             Text = "Student Form";
             Load += StudentForm_Load;
+            ((System.ComponentModel.ISupportInitialize)pbStudent).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -317,5 +367,10 @@
         private Label lblCourseError;
         private CheckBox chkAgree;
         private Label lblAgreeError;
+        private PictureBox pbStudent;
+        private Button btnUpload;
+        private Button btnRemove;
+        private TextBox txtImage;
+        private OpenFileDialog openFileDialog1;
     }
 }

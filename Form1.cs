@@ -1,3 +1,5 @@
+using System.Windows.Forms;
+
 namespace WinFormsApp1
 {
     public partial class StudentForm : Form
@@ -16,6 +18,10 @@ namespace WinFormsApp1
             txtFee.Text = "35000";
             txtFee.Enabled = false;
             rbMale.Checked = true;
+            pbStudent.BorderStyle = BorderStyle.Fixed3D;
+            pbStudent.SizeMode = PictureBoxSizeMode.StretchImage;  // adjust the size of the
+            pbStudent.Load(@"D:\Project_Dotnet\pic1.jpg");
+            txtImage.Enabled = false; // not be able to copy the text in the image box i.e read only
         }
 
         public void LoadCourses()
@@ -194,5 +200,25 @@ namespace WinFormsApp1
                 lblAgreeError.Visible = false;
             }
         }
+
+        private void btnUpload_Click(object sender, EventArgs e)    //this is the open dialog box created by drag and drop in the form
+        {
+            openFileDialog1.Filter = "Images |*.jpg;*.jpeg;*.png;"; // shows only jpg;*.jpeg;*.png files when uploading the image
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                pbStudent.Load(openFileDialog1.FileName);
+                txtImage.Text = openFileDialog1.SafeFileName;// shows the image name in the txtImage box which is selected by the user
+            }                                           // SafeFileName only gives the name of the selected image by the user
+        }
+
+        #region this is remove button of image
+
+        private void btnRemove_Click_1(object sender, EventArgs e)
+        {
+            pbStudent.Image = null;
+            txtImage.Clear();
+        }
+
+        #endregion this is remove button of image
     }
 }
