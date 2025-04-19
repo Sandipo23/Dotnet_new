@@ -4,13 +4,102 @@ namespace WinFormsApp1
 {
     public partial class StudentForm : Form
     {
+        private readonly StudentService _studentService;
+        private string _uploadedFile;
+
         public StudentForm()
         {
+            _studentService = new StudentService();
             InitializeComponent();
             InitializeFormComponent();
 
             LoadCourses();    // this is for array og course
+
+            //LoadFormData();  // to show the data thst is saved in json file in our form
+            LoadStudentsGrid();
         }
+
+        private void LoadStudentsGrid()
+        {
+            dgvStudents.AutoGenerateColumns = false;
+            dgvStudents.Columns.Add(new DataGridViewColumn   // it is for changing the name of the column
+            {
+                Name = nameof(StudentRead.FirstName),
+                HeaderText = "First Name",                        // actual showing name in the grid
+                CellTemplate = new DataGridViewTextBoxCell(),  //this makes checkboz to string
+                DataPropertyName = nameof(StudentRead.FirstName)  // used for matching the column name with the data inserted
+            });
+            dgvStudents.Columns.Add(new DataGridViewColumn
+            {
+                Name = nameof(StudentRead.LastName),
+                HeaderText = "Last Name",
+                CellTemplate = new DataGridViewTextBoxCell(),
+                DataPropertyName = nameof(StudentRead.LastName)
+            });
+            dgvStudents.Columns.Add(new DataGridViewColumn
+            {
+                Name = nameof(StudentRead.Gender),
+                HeaderText = "Gender",
+                CellTemplate = new DataGridViewTextBoxCell(),
+                DataPropertyName = nameof(StudentRead.Gender)
+            });
+            dgvStudents.Columns.Add(new DataGridViewColumn
+            {
+                Name = nameof(StudentRead.Agree),
+                HeaderText = "Agree",
+                CellTemplate = new DataGridViewTextBoxCell(),
+                DataPropertyName = nameof(StudentRead.Agree)
+            });
+            dgvStudents.Columns.Add(new DataGridViewColumn
+            {
+                Name = nameof(StudentRead.Course),
+                HeaderText = "Course",
+                CellTemplate = new DataGridViewTextBoxCell(),
+                DataPropertyName = nameof(StudentRead.Course)
+            });
+            dgvStudents.Columns.Add(new DataGridViewColumn
+            {
+                Name = nameof(StudentRead.Profile),
+                HeaderText = "Profile",
+                CellTemplate = new DataGridViewTextBoxCell(),
+                DataPropertyName = nameof(StudentRead.Profile)
+            });
+            LoadStudents();
+        }
+
+        private void LoadStudents()
+        {
+            var students = _studentService.GetAll();
+            if (students.Count > 0)
+            {
+                dgvStudents.DataSource = students;
+            }
+        }
+
+        //private void LoadFormData()
+        //{
+        //    var student = _studentService.Get();  // alredy save vayeko data student ko data variable student ma ayo
+        //    if (student != null)
+        //    {
+        //        txtFirstName.Text = student.FirstName;
+        //        txtLastName.Text = student.LastName;
+        //        if (student.Gender)
+        //        {
+        //            rbMale.Checked = true;
+        //        }
+        //        else
+        //        {
+        //            rbFemale.Checked = true;
+        //        }
+        //        cmbCourse.Text = student.Course;
+        //        chkAgree.Checked = student.Agree;
+        //        if (!String.IsNullOrEmpty(student.Profile) && File.Exists(student.Profile))  //if file xa vane matra loade garne image
+        //        {
+        //            txtImage.Text = Path.GetFileName(student.Profile);
+        //            pbStudent.Load(Path.Combine(_studentService._folderLocation, student.Profile));
+        //        }
+        //    }
+        //}
 
         private void InitializeFormComponent()
         {
@@ -20,7 +109,7 @@ namespace WinFormsApp1
             rbMale.Checked = true;
             pbStudent.BorderStyle = BorderStyle.Fixed3D;
             pbStudent.SizeMode = PictureBoxSizeMode.StretchImage;  // adjust the size of the
-            pbStudent.Load(@"D:\Project_Dotnet\pic1.jpg");
+                                                                   // pbStudent.Load(@"D:\Project_Dotnet\pic1.jpg");
             txtImage.Enabled = false; // not be able to copy the text in the image box i.e read only
         }
 
@@ -38,8 +127,8 @@ namespace WinFormsApp1
             //cmbCourse.Items.Add("BBS");
             //cmbCourse.Items.Add("BBA");
 
-            var studentService = new StudentService();   // object of class StudentService is made
-            string[] courses = studentService.GetAllCourses();  // the return in the class SrudentServide will return in GetAllCourses and stores the items in courses
+            // var studentService = new StudentService();   // object of class StudentService is made
+            string[] courses = _studentService.GetAllCourses();  // the return in the class SrudentServide will return in GetAllCourses and stores the items in courses
 
             // 3rd syntax
             //for (int i = 0; i < courses.Length; i++)
@@ -158,10 +247,11 @@ namespace WinFormsApp1
             {
                 lblAgreeError.Visible = false;
             }
-
+            //string imagePath = Path.Combine(_studentService._folderLocation, txtImage.Text);  // to store and retreive the image path
+            string imagePath = String.IsNullOrEmpty(txtImage.Text) ? null : Path.Combine(_studentService._folderLocation, txtImage.Text);
             if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName) && cmbCourse.SelectedIndex > 0 && agree)
             {
-                StudentService studentService = new StudentService();
+                //StudentService studentService = new StudentService();
                 Student student = new Student     //just property ma save garna lai object banako
                 {
                     FirstName = firstName,
@@ -169,9 +259,14 @@ namespace WinFormsApp1
                     Gender = gender,
                     Agree = agree,
                     Course = course,
-                    Profile = ""
+                    Profile = imagePath
                 };
-                studentService.Save(student);  // student ko info save gareko so that json ma save garauma
+                _studentService.Save(student);  // student ko info save gareko so that json ma save garauma
+                if (!String.IsNullOrEmpty(_uploadedFile) && !String.IsNullOrEmpty(txtImage.Text))
+                {
+                    _studentService.SaveImage(_uploadedFile, imagePath);
+                }
+                LoadStudents();
                 MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ResetControls();
             }
@@ -181,7 +276,12 @@ namespace WinFormsApp1
         {
             txtFirstName.Clear();
             txtLastName.Clear();
-            pbStudent.Image = null;
+
+            cmbCourse.SelectedIndex = 0;
+            chkAgree.Checked = false;
+            rbMale.Checked = true;
+            RemoveImage();
+            _uploadedFile = "";
             txtFirstName.Focus();
         }
 
@@ -218,12 +318,19 @@ namespace WinFormsApp1
             openFileDialog1.Filter = "Images |*.jpg;*.jpeg;*.png;"; // shows only jpg;*.jpeg;*.png files when uploading the image
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                pbStudent.Load(openFileDialog1.FileName);
+                // pbStudent.Load(openFileDialog1.FileName);
+                _uploadedFile = openFileDialog1.FileName;
+                pbStudent.Load(_uploadedFile);
                 txtImage.Text = openFileDialog1.SafeFileName;// shows the image name in the txtImage box which is selected by the user
             }                                           // SafeFileName only gives the name of the selected image by the user
         }
 
         private void btnRemove_Click_1(object sender, EventArgs e)
+        {
+            RemoveImage();
+        }
+
+        private void RemoveImage()
         {
             pbStudent.Image = null;
             txtImage.Clear();

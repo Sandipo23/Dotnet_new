@@ -53,7 +53,9 @@
             btnRemove = new Button();
             txtImage = new TextBox();
             openFileDialog1 = new OpenFileDialog();
+            dgvStudents = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)pbStudent).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvStudents).BeginInit();
             SuspendLayout();
             // 
             // cmbCourse
@@ -307,11 +309,23 @@
             // 
             openFileDialog1.FileName = "openFileDialog1";
             // 
+            // dgvStudents
+            // 
+            dgvStudents.AllowUserToAddRows = false;
+            dgvStudents.AllowUserToDeleteRows = false;
+            dgvStudents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvStudents.Location = new Point(39, 366);
+            dgvStudents.Name = "dgvStudents";
+            dgvStudents.ReadOnly = true;
+            dgvStudents.Size = new Size(723, 210);
+            dgvStudents.TabIndex = 1029;
+            // 
             // StudentForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 598);
+            Controls.Add(dgvStudents);
             Controls.Add(txtImage);
             Controls.Add(btnRemove);
             Controls.Add(btnUpload);
@@ -340,6 +354,7 @@
             Text = "Student Form";
             Load += StudentForm_Load;
             ((System.ComponentModel.ISupportInitialize)pbStudent).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvStudents).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -372,5 +387,6 @@
         private Button btnRemove;
         private TextBox txtImage;
         private OpenFileDialog openFileDialog1;
+        private DataGridView dgvStudents;
     }
 }
