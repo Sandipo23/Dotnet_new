@@ -162,7 +162,7 @@ namespace WinFormsApp1
             if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName) && cmbCourse.SelectedIndex > 0 && agree)
             {
                 StudentService studentService = new StudentService();
-                Student student = new Student
+                Student student = new Student     //just property ma save garna lai object banako
                 {
                     FirstName = firstName,
                     LastName = lastName,
@@ -171,6 +171,7 @@ namespace WinFormsApp1
                     Course = course,
                     Profile = ""
                 };
+                studentService.Save(student);  // student ko info save gareko so that json ma save garauma
                 MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ResetControls();
             }
@@ -180,6 +181,7 @@ namespace WinFormsApp1
         {
             txtFirstName.Clear();
             txtLastName.Clear();
+            pbStudent.Image = null;
             txtFirstName.Focus();
         }
 
@@ -221,14 +223,10 @@ namespace WinFormsApp1
             }                                           // SafeFileName only gives the name of the selected image by the user
         }
 
-        #region this is remove button of image
-
         private void btnRemove_Click_1(object sender, EventArgs e)
         {
             pbStudent.Image = null;
             txtImage.Clear();
         }
-
-        #endregion this is remove button of image
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,12 +16,7 @@ namespace WinFormsApp1
         public const string _fee = "3,50,000";
 
         // Readonly
-        public readonly string _folderLocation = @"D:\Project_Dotnet";
-
-        public StudentService()
-        {
-            _folderLocation = "";
-        }
+        public readonly string _folderLocation = @"D:\Project_Dotnet\json";
 
         public string[] GetAllCourses()
         {
@@ -44,9 +40,12 @@ namespace WinFormsApp1
             return abc;
         }
 
-        public void Save(Student student)
+        public void Save(Student student)     //student property ma vayeko information yeta pass hunxa
         {
             // Saves data
+            string json = JsonConvert.SerializeObject(student);
+            string path = $@"{_folderLocation}\student.json";  // this is just a string interpolation
+            File.WriteAllText(path, json);
         }
     }
 }
