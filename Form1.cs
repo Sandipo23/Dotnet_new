@@ -15,7 +15,7 @@ namespace WinFormsApp1
         private void InitializeFormComponent()
         {
             txtFee.ReadOnly = true;
-            txtFee.Text = "35000";
+            txtFee.Text = StudentService._fee;
             txtFee.Enabled = false;
             rbMale.Checked = true;
             pbStudent.BorderStyle = BorderStyle.Fixed3D;
@@ -161,6 +161,16 @@ namespace WinFormsApp1
 
             if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName) && cmbCourse.SelectedIndex > 0 && agree)
             {
+                StudentService studentService = new StudentService();
+                Student student = new Student
+                {
+                    FirstName = firstName,
+                    LastName = lastName,
+                    Gender = gender,
+                    Agree = agree,
+                    Course = course,
+                    Profile = ""
+                };
                 MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ResetControls();
             }

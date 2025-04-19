@@ -8,6 +8,20 @@ namespace WinFormsApp1
 {
     internal class StudentService
     {
+        // Fields
+        private int _id;
+
+        // Constant
+        public const string _fee = "3,50,000";
+
+        // Readonly
+        public readonly string _folderLocation = @"D:\Project_Dotnet";
+
+        public StudentService()
+        {
+            _folderLocation = "";
+        }
+
         public string[] GetAllCourses()
         {
             // 1st syntax
@@ -28,6 +42,11 @@ namespace WinFormsApp1
             // 4th syntax
             string[] abc = { "Please select a course", "BCA", "BIT", "BIM", "BBA", "BBS" };
             return abc;
+        }
+
+        public void Save(Student student)
+        {
+            // Saves data
         }
     }
 }
