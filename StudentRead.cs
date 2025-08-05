@@ -13,6 +13,7 @@ namespace WinFormsApp1
         public string Gender { get; set; }
         public string Agree { get; set; }
         public string Course { get; set; }
+        public string DOB { get; set; }
         public string Profile { get; set; }
     }
 }

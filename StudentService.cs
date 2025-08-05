@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static WinFormsApp1.StudetUtility;
 
 namespace WinFormsApp1
 {
@@ -14,8 +15,9 @@ namespace WinFormsApp1
         // Fields
         private int _id;
 
-        // Constant
-        public const string _fee = "3,50,000";
+        // Constant which is alredy in Constants class
+        //public const string _fee = "3,50,000";
+        //public const string _format = "dd/MM/yyyy";
 
         // Readonly
         public readonly string _folderLocation;
@@ -83,7 +85,7 @@ namespace WinFormsApp1
             var studentList = GetExistingStudents();
             if (studentList.Count > 0)
             {
-                var students = ConvertToStudentRead(studentList);
+                var students = StudentUtility.ConvertToStudentRead(studentList);   // yo data grid ma dekhauna ko lagi ho ,data yeta aaunai parxa
                 return students;
             }
 
@@ -101,25 +103,6 @@ namespace WinFormsApp1
             }
 
             return new List<Student>();
-        }
-
-        private List<StudentRead> ConvertToStudentRead(List<Student> students)  // in this method we show gender true false to male female
-        {
-            var studentReads = new List<StudentRead>();  // existing list (Student) lai new list (StudentRead) ma convert gareko
-            foreach (Student student in students)
-            {
-                studentReads.Add(new StudentRead
-                {
-                    FirstName = student.FirstName,
-                    LastName = student.LastName,
-                    Gender = student.Gender ? "Male" : "Female",
-                    Agree = student.Agree ? "Yes" : "No",
-                    Course = student.Course,
-                    Profile = student.Profile
-                });
-            }
-
-            return studentReads;
         }
     }
 }

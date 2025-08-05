@@ -47,13 +47,16 @@
             btnCancel = new Button();
             lblCourseError = new Label();
             chkAgree = new CheckBox();
-            lblAgreeError = new Label();
             pbStudent = new PictureBox();
             btnUpload = new Button();
             btnRemove = new Button();
             txtImage = new TextBox();
             openFileDialog1 = new OpenFileDialog();
             dgvStudents = new DataGridView();
+            lblDOBError = new Label();
+            lblDOB = new Label();
+            dtpDOB = new DateTimePicker();
+            lblAgreeError = new Label();
             ((System.ComponentModel.ISupportInitialize)pbStudent).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvStudents).BeginInit();
             SuspendLayout();
@@ -93,7 +96,7 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(140, 296);
+            btnSave.Location = new Point(137, 365);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(126, 39);
             btnSave.TabIndex = 1015;
@@ -225,7 +228,7 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(285, 296);
+            btnCancel.Location = new Point(282, 365);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(109, 39);
             btnCancel.TabIndex = 1023;
@@ -249,26 +252,13 @@
             // chkAgree
             // 
             chkAgree.AutoSize = true;
-            chkAgree.Location = new Point(140, 247);
+            chkAgree.Location = new Point(137, 316);
             chkAgree.Name = "chkAgree";
             chkAgree.Size = new Size(176, 19);
             chkAgree.TabIndex = 1024;
             chkAgree.Text = "I agree terms and conditions";
             chkAgree.UseVisualStyleBackColor = true;
             chkAgree.CheckedChanged += chkAgree_CheckedChanged;
-            // 
-            // lblAgreeError
-            // 
-            lblAgreeError.AutoSize = true;
-            lblAgreeError.Font = new Font("Segoe UI", 11F);
-            lblAgreeError.ForeColor = Color.Red;
-            lblAgreeError.Location = new Point(326, 244);
-            lblAgreeError.Name = "lblAgreeError";
-            lblAgreeError.Size = new Size(251, 20);
-            lblAgreeError.TabIndex = 1007;
-            lblAgreeError.Text = "must agree the terms and conditions";
-            lblAgreeError.Visible = false;
-            lblAgreeError.Click += lblLastNameError_Click;
             // 
             // pbStudent
             // 
@@ -314,17 +304,62 @@
             dgvStudents.AllowUserToAddRows = false;
             dgvStudents.AllowUserToDeleteRows = false;
             dgvStudents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvStudents.Location = new Point(39, 366);
+            dgvStudents.Location = new Point(39, 438);
             dgvStudents.Name = "dgvStudents";
             dgvStudents.ReadOnly = true;
             dgvStudents.Size = new Size(723, 210);
             dgvStudents.TabIndex = 1029;
+            // 
+            // lblDOBError
+            // 
+            lblDOBError.AutoSize = true;
+            lblDOBError.Font = new Font("Segoe UI", 11F);
+            lblDOBError.ForeColor = Color.Red;
+            lblDOBError.Location = new Point(363, 252);
+            lblDOBError.Name = "lblDOBError";
+            lblDOBError.Size = new Size(114, 20);
+            lblDOBError.TabIndex = 1007;
+            lblDOBError.Text = "DOB is required";
+            lblDOBError.Visible = false;
+            lblDOBError.Click += lblLastNameError_Click;
+            // 
+            // lblDOB
+            // 
+            lblDOB.AutoSize = true;
+            lblDOB.Font = new Font("Segoe UI", 11F);
+            lblDOB.Location = new Point(39, 247);
+            lblDOB.Name = "lblDOB";
+            lblDOB.Size = new Size(40, 20);
+            lblDOB.TabIndex = 1011;
+            lblDOB.Text = "DOB";
+            // 
+            // dtpDOB
+            // 
+            dtpDOB.Location = new Point(137, 249);
+            dtpDOB.Name = "dtpDOB";
+            dtpDOB.Size = new Size(200, 23);
+            dtpDOB.TabIndex = 1030;
+            dtpDOB.ValueChanged += dtpDOB_ValueChanged;
+            // 
+            // lblAgreeError
+            // 
+            lblAgreeError.AutoSize = true;
+            lblAgreeError.Font = new Font("Segoe UI", 11F);
+            lblAgreeError.ForeColor = Color.Red;
+            lblAgreeError.Location = new Point(323, 313);
+            lblAgreeError.Name = "lblAgreeError";
+            lblAgreeError.Size = new Size(251, 20);
+            lblAgreeError.TabIndex = 1007;
+            lblAgreeError.Text = "must agree the terms and conditions";
+            lblAgreeError.Visible = false;
+            lblAgreeError.Click += lblLastNameError_Click;
             // 
             // StudentForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 598);
+            Controls.Add(dtpDOB);
             Controls.Add(dgvStudents);
             Controls.Add(txtImage);
             Controls.Add(btnRemove);
@@ -339,11 +374,13 @@
             Controls.Add(txtFee);
             Controls.Add(txtFullName);
             Controls.Add(txtLastName);
+            Controls.Add(lblDOB);
             Controls.Add(txtFirstName);
             Controls.Add(txtCourse);
             Controls.Add(lblGender);
             Controls.Add(lblFee);
             Controls.Add(lblFullName);
+            Controls.Add(lblDOBError);
             Controls.Add(lblAgreeError);
             Controls.Add(lblCourseError);
             Controls.Add(lblLastNameError);
@@ -381,12 +418,15 @@
         private Button btnCancel;
         private Label lblCourseError;
         private CheckBox chkAgree;
-        private Label lblAgreeError;
         private PictureBox pbStudent;
         private Button btnUpload;
         private Button btnRemove;
         private TextBox txtImage;
         private OpenFileDialog openFileDialog1;
         private DataGridView dgvStudents;
+        private Label lblDOBError;
+        private Label lblDOB;
+        private DateTimePicker dtpDOB;
+        private Label lblAgreeError;
     }
 }

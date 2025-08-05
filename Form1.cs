@@ -57,6 +57,14 @@ namespace WinFormsApp1
                 CellTemplate = new DataGridViewTextBoxCell(),
                 DataPropertyName = nameof(StudentRead.Course)
             });
+
+            dgvStudents.Columns.Add(new DataGridViewColumn
+            {
+                Name = nameof(StudentRead.DOB),
+                HeaderText = "DOB",
+                CellTemplate = new DataGridViewTextBoxCell(),
+                DataPropertyName = nameof(StudentRead.DOB)
+            });
             dgvStudents.Columns.Add(new DataGridViewColumn
             {
                 Name = nameof(StudentRead.Profile),
@@ -104,13 +112,15 @@ namespace WinFormsApp1
         private void InitializeFormComponent()
         {
             txtFee.ReadOnly = true;
-            txtFee.Text = StudentService._fee;
+            txtFee.Text = Constants.Fee;
             txtFee.Enabled = false;
             rbMale.Checked = true;
             pbStudent.BorderStyle = BorderStyle.Fixed3D;
             pbStudent.SizeMode = PictureBoxSizeMode.StretchImage;  // adjust the size of the
                                                                    // pbStudent.Load(@"D:\Project_Dotnet\pic1.jpg");
             txtImage.Enabled = false; // not be able to copy the text in the image box i.e read only
+            dtpDOB.Format = DateTimePickerFormat.Custom;
+            dtpDOB.CustomFormat = " ";  // suru ma empty date dekhauxa
         }
 
         public void LoadCourses()
@@ -212,6 +222,7 @@ namespace WinFormsApp1
             bool gender = rbMale.Checked;
             string course = cmbCourse.Text;
             bool agree = chkAgree.Checked;
+            string dob = dtpDOB.Text.Trim();
 
             if (String.IsNullOrEmpty(firstName))
             {
@@ -247,9 +258,18 @@ namespace WinFormsApp1
             {
                 lblAgreeError.Visible = false;
             }
+
+            if (String.IsNullOrEmpty(dob))
+            {
+                lblDOBError.Visible = true;
+            }
+            else
+            {
+                lblDOBError.Visible = false;
+            }
             //string imagePath = Path.Combine(_studentService._folderLocation, txtImage.Text);  // to store and retreive the image path
             string imagePath = String.IsNullOrEmpty(txtImage.Text) ? null : Path.Combine(_studentService._folderLocation, txtImage.Text);
-            if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName) && cmbCourse.SelectedIndex > 0 && agree)
+            if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName) && cmbCourse.SelectedIndex > 0 && agree && !String.IsNullOrEmpty(dob))
             {
                 //StudentService studentService = new StudentService();
                 Student student = new Student     //just property ma save garna lai object banako
@@ -259,6 +279,7 @@ namespace WinFormsApp1
                     Gender = gender,
                     Agree = agree,
                     Course = course,
+                    DOB = dtpDOB.Value,
                     Profile = imagePath
                 };
                 _studentService.Save(student);  // student ko info save gareko so that json ma save garauma
@@ -282,6 +303,7 @@ namespace WinFormsApp1
             rbMale.Checked = true;
             RemoveImage();
             _uploadedFile = "";
+            dtpDOB.CustomFormat = " ";
             txtFirstName.Focus();
         }
 
@@ -334,6 +356,12 @@ namespace WinFormsApp1
         {
             pbStudent.Image = null;
             txtImage.Clear();
+        }
+
+        private void dtpDOB_ValueChanged(object sender, EventArgs e)
+        {
+            dtpDOB.CustomFormat = Constants.Format;
+            lblDOBError.Visible = false;
         }
     }
 }
