@@ -1,0 +1,95 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Project_Dotnet\\CsharpPractice\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1C3282C8-059C-43BC-97B6-1BC8354E42C4}|CsharpPractice.csproj|d:\\project_dotnet\\csharppractice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C3282C8-059C-43BC-97B6-1BC8354E42C4}|CsharpPractice.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C3282C8-059C-43BC-97B6-1BC8354E42C4}|CsharpPractice.csproj|d:\\project_dotnet\\csharppractice\\class11.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C3282C8-059C-43BC-97B6-1BC8354E42C4}|CsharpPractice.csproj|solutionrelative:class11.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C3282C8-059C-43BC-97B6-1BC8354E42C4}|CsharpPractice.csproj|d:\\project_dotnet\\csharppractice\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C3282C8-059C-43BC-97B6-1BC8354E42C4}|CsharpPractice.csproj|solutionrelative:class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C3282C8-059C-43BC-97B6-1BC8354E42C4}|CsharpPractice.csproj|d:\\project_dotnet\\csharppractice\\csharppractice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{1C3282C8-059C-43BC-97B6-1BC8354E42C4}|CsharpPractice.csproj|solutionrelative:csharppractice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "class11.cs",
+              "DocumentMoniker": "D:\\Project_Dotnet\\CsharpPractice\\class11.cs",
+              "RelativeDocumentMoniker": "class11.cs",
+              "ToolTip": "D:\\Project_Dotnet\\CsharpPractice\\class11.cs",
+              "RelativeToolTip": "class11.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-26T14:43:21.048Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Project_Dotnet\\CsharpPractice\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\Project_Dotnet\\CsharpPractice\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-25T17:02:27.116Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CsharpPractice.csproj",
+              "DocumentMoniker": "D:\\Project_Dotnet\\CsharpPractice\\CsharpPractice.csproj",
+              "RelativeDocumentMoniker": "CsharpPractice.csproj",
+              "ToolTip": "D:\\Project_Dotnet\\CsharpPractice\\CsharpPractice.csproj",
+              "RelativeToolTip": "CsharpPractice.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-25T17:03:06.476Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "D:\\Project_Dotnet\\CsharpPractice\\Class1.cs",
+              "RelativeDocumentMoniker": "Class1.cs",
+              "ToolTip": "D:\\Project_Dotnet\\CsharpPractice\\Class1.cs",
+              "RelativeToolTip": "Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-25T17:05:02.051Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
