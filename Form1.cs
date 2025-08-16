@@ -128,7 +128,8 @@ namespace WinFormsApp1
             txtImage.Enabled = false; // not be able to copy the text in the image box i.e read only
             dtpDOB.Format = DateTimePickerFormat.Custom;
             dtpDOB.CustomFormat = " ";  // suru ma empty date dekhauxa
-            lbHobbies.SelectionMode = SelectionMode.MultiExtended;
+            //lbHobbies.SelectionMode = SelectionMode.MultiSimple;  // thic code is for listbox not checked listbox
+            lbHobbies.CheckOnClick = true;
         }
 
         public void LoadCourses()
@@ -231,7 +232,8 @@ namespace WinFormsApp1
             string course = cmbCourse.Text;
             bool agree = chkAgree.Checked;
             string dob = dtpDOB.Text.Trim();
-            string[] hobbies = lbHobbies.SelectedItems.Cast<string>().ToArray();
+            //string[] hobbies = lbHobbies.SelectedItems.Cast<string>().ToArray();  this is for listbox
+            string[] hobbies = lbHobbies.CheckedItems.Cast<string>().ToArray();  // this is for checked list box - gives the data that user clicked
 
             if (String.IsNullOrEmpty(firstName))
             {
@@ -323,6 +325,7 @@ namespace WinFormsApp1
             RemoveImage();
             _uploadedFile = "";
             dtpDOB.CustomFormat = " ";
+            lbHobbies.SelectedItems.Clear();
             txtFirstName.Focus();
         }
 
@@ -381,6 +384,19 @@ namespace WinFormsApp1
         {
             dtpDOB.CustomFormat = Constants.Format;
             lblDOBError.Visible = false;
+        }
+
+        private void lbHobbies_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void lbHobbies_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            lbHobbies.ClearSelected();
+            if (lbHobbies.CheckedItems.Count > 0)
+            {
+                lblHobbiesError.Visible = false;
+            }
         }
     }
 }

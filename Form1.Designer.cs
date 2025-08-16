@@ -58,8 +58,8 @@
             dtpDOB = new DateTimePicker();
             lblAgreeError = new Label();
             txtHobbies = new Label();
-            lbHobbies = new ListBox();
             lblHobbiesError = new Label();
+            lbHobbies = new CheckedListBox();
             ((System.ComponentModel.ISupportInitialize)pbStudent).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvStudents).BeginInit();
             SuspendLayout();
@@ -367,15 +367,6 @@
             txtHobbies.TabIndex = 1011;
             txtHobbies.Text = "Hobbies:";
             // 
-            // lbHobbies
-            // 
-            lbHobbies.FormattingEnabled = true;
-            lbHobbies.ItemHeight = 15;
-            lbHobbies.Location = new Point(142, 289);
-            lbHobbies.Name = "lbHobbies";
-            lbHobbies.Size = new Size(195, 94);
-            lbHobbies.TabIndex = 1031;
-            // 
             // lblHobbiesError
             // 
             lblHobbiesError.AutoSize = true;
@@ -388,6 +379,15 @@
             lblHobbiesError.Text = "hobbies must be selected";
             lblHobbiesError.Visible = false;
             lblHobbiesError.Click += lblLastNameError_Click;
+            // 
+            // lbHobbies
+            // 
+            lbHobbies.FormattingEnabled = true;
+            lbHobbies.Location = new Point(137, 289);
+            lbHobbies.Name = "lbHobbies";
+            lbHobbies.Size = new Size(200, 94);
+            lbHobbies.TabIndex = 1031;
+            lbHobbies.SelectedIndexChanged += lbHobbies_SelectedIndexChanged_1;
             // 
             // StudentForm
             // 
@@ -467,7 +467,7 @@
         private DateTimePicker dtpDOB;
         private Label lblAgreeError;
         private Label txtHobbies;
-        private ListBox lbHobbies;
         private Label lblHobbiesError;
+        private CheckedListBox lbHobbies;
     }
 }
