@@ -6,7 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static WinFormsApp1.StudetUtility;
+
+//using static WinFormsApp1.StudetUtility;
 
 namespace WinFormsApp1
 {
@@ -50,6 +51,12 @@ namespace WinFormsApp1
             // 4th syntax
             string[] abc = { "Please select a course", "BCA", "BIT", "BIM", "BBA", "BBS" };
             return abc;
+        }
+
+        public string[] GetAllHobbies()
+        {
+            string[] hobbies = { "Music", "Dance", "Hiking", "Programming", "Swimming" };
+            return hobbies;
         }
 
         public void Save(Student student)     //student property ma vayeko information yeta pass hunxa

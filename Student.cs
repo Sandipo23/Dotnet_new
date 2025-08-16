@@ -15,5 +15,6 @@ namespace WinFormsApp1
         public string Course { get; set; }
         public DateTime DOB { get; set; }
         public string Profile { get; set; }
+        public string[] Hobbies { get; set; }
     }
 }

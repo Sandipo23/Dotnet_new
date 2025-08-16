@@ -13,10 +13,17 @@ namespace WinFormsApp1
             InitializeComponent();
             InitializeFormComponent();
 
-            LoadCourses();    // this is for array og course
+            LoadCourses();    // this is for array of course
 
             //LoadFormData();  // to show the data thst is saved in json file in our form
             LoadStudentsGrid();
+            LoadHobbies();
+        }
+
+        private void LoadHobbies()
+        {
+            string[] hobbies = _studentService.GetAllHobbies();
+            lbHobbies.Items.AddRange(hobbies);
         }
 
         private void LoadStudentsGrid()
@@ -121,6 +128,7 @@ namespace WinFormsApp1
             txtImage.Enabled = false; // not be able to copy the text in the image box i.e read only
             dtpDOB.Format = DateTimePickerFormat.Custom;
             dtpDOB.CustomFormat = " ";  // suru ma empty date dekhauxa
+            lbHobbies.SelectionMode = SelectionMode.MultiExtended;
         }
 
         public void LoadCourses()
@@ -223,6 +231,7 @@ namespace WinFormsApp1
             string course = cmbCourse.Text;
             bool agree = chkAgree.Checked;
             string dob = dtpDOB.Text.Trim();
+            string[] hobbies = lbHobbies.SelectedItems.Cast<string>().ToArray();
 
             if (String.IsNullOrEmpty(firstName))
             {
@@ -267,9 +276,18 @@ namespace WinFormsApp1
             {
                 lblDOBError.Visible = false;
             }
+
+            if (hobbies.Length <= 0)
+            {
+                lblHobbiesError.Visible = true;
+            }
+            else
+            {
+                lblHobbiesError.Visible = false;
+            }
             //string imagePath = Path.Combine(_studentService._folderLocation, txtImage.Text);  // to store and retreive the image path
             string imagePath = String.IsNullOrEmpty(txtImage.Text) ? null : Path.Combine(_studentService._folderLocation, txtImage.Text);
-            if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName) && cmbCourse.SelectedIndex > 0 && agree && !String.IsNullOrEmpty(dob))
+            if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName) && cmbCourse.SelectedIndex > 0 && agree && !String.IsNullOrEmpty(dob) && hobbies.Length > 0)
             {
                 //StudentService studentService = new StudentService();
                 Student student = new Student     //just property ma save garna lai object banako
@@ -280,7 +298,8 @@ namespace WinFormsApp1
                     Agree = agree,
                     Course = course,
                     DOB = dtpDOB.Value,
-                    Profile = imagePath
+                    Profile = imagePath,
+                    Hobbies = hobbies
                 };
                 _studentService.Save(student);  // student ko info save gareko so that json ma save garauma
                 if (!String.IsNullOrEmpty(_uploadedFile) && !String.IsNullOrEmpty(txtImage.Text))

@@ -57,6 +57,9 @@
             lblDOB = new Label();
             dtpDOB = new DateTimePicker();
             lblAgreeError = new Label();
+            txtHobbies = new Label();
+            lbHobbies = new ListBox();
+            lblHobbiesError = new Label();
             ((System.ComponentModel.ISupportInitialize)pbStudent).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvStudents).BeginInit();
             SuspendLayout();
@@ -96,7 +99,7 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(137, 365);
+            btnSave.Location = new Point(136, 451);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(126, 39);
             btnSave.TabIndex = 1015;
@@ -228,7 +231,7 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(282, 365);
+            btnCancel.Location = new Point(281, 451);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(109, 39);
             btnCancel.TabIndex = 1023;
@@ -252,7 +255,7 @@
             // chkAgree
             // 
             chkAgree.AutoSize = true;
-            chkAgree.Location = new Point(137, 316);
+            chkAgree.Location = new Point(136, 402);
             chkAgree.Name = "chkAgree";
             chkAgree.Size = new Size(176, 19);
             chkAgree.TabIndex = 1024;
@@ -304,10 +307,10 @@
             dgvStudents.AllowUserToAddRows = false;
             dgvStudents.AllowUserToDeleteRows = false;
             dgvStudents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvStudents.Location = new Point(39, 438);
+            dgvStudents.Location = new Point(38, 524);
             dgvStudents.Name = "dgvStudents";
             dgvStudents.ReadOnly = true;
-            dgvStudents.Size = new Size(723, 210);
+            dgvStudents.Size = new Size(723, 238);
             dgvStudents.TabIndex = 1029;
             // 
             // lblDOBError
@@ -346,7 +349,7 @@
             lblAgreeError.AutoSize = true;
             lblAgreeError.Font = new Font("Segoe UI", 11F);
             lblAgreeError.ForeColor = Color.Red;
-            lblAgreeError.Location = new Point(323, 313);
+            lblAgreeError.Location = new Point(322, 399);
             lblAgreeError.Name = "lblAgreeError";
             lblAgreeError.Size = new Size(251, 20);
             lblAgreeError.TabIndex = 1007;
@@ -354,11 +357,44 @@
             lblAgreeError.Visible = false;
             lblAgreeError.Click += lblLastNameError_Click;
             // 
+            // txtHobbies
+            // 
+            txtHobbies.AutoSize = true;
+            txtHobbies.Font = new Font("Segoe UI", 11F);
+            txtHobbies.Location = new Point(39, 289);
+            txtHobbies.Name = "txtHobbies";
+            txtHobbies.Size = new Size(68, 20);
+            txtHobbies.TabIndex = 1011;
+            txtHobbies.Text = "Hobbies:";
+            // 
+            // lbHobbies
+            // 
+            lbHobbies.FormattingEnabled = true;
+            lbHobbies.ItemHeight = 15;
+            lbHobbies.Location = new Point(142, 289);
+            lbHobbies.Name = "lbHobbies";
+            lbHobbies.Size = new Size(195, 94);
+            lbHobbies.TabIndex = 1031;
+            // 
+            // lblHobbiesError
+            // 
+            lblHobbiesError.AutoSize = true;
+            lblHobbiesError.Font = new Font("Segoe UI", 11F);
+            lblHobbiesError.ForeColor = Color.Red;
+            lblHobbiesError.Location = new Point(363, 329);
+            lblHobbiesError.Name = "lblHobbiesError";
+            lblHobbiesError.Size = new Size(178, 20);
+            lblHobbiesError.TabIndex = 1007;
+            lblHobbiesError.Text = "hobbies must be selected";
+            lblHobbiesError.Visible = false;
+            lblHobbiesError.Click += lblLastNameError_Click;
+            // 
             // StudentForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 598);
+            ClientSize = new Size(800, 802);
+            Controls.Add(lbHobbies);
             Controls.Add(dtpDOB);
             Controls.Add(dgvStudents);
             Controls.Add(txtImage);
@@ -374,12 +410,14 @@
             Controls.Add(txtFee);
             Controls.Add(txtFullName);
             Controls.Add(txtLastName);
+            Controls.Add(txtHobbies);
             Controls.Add(lblDOB);
             Controls.Add(txtFirstName);
             Controls.Add(txtCourse);
             Controls.Add(lblGender);
             Controls.Add(lblFee);
             Controls.Add(lblFullName);
+            Controls.Add(lblHobbiesError);
             Controls.Add(lblDOBError);
             Controls.Add(lblAgreeError);
             Controls.Add(lblCourseError);
@@ -428,5 +466,8 @@
         private Label lblDOB;
         private DateTimePicker dtpDOB;
         private Label lblAgreeError;
+        private Label txtHobbies;
+        private ListBox lbHobbies;
+        private Label lblHobbiesError;
     }
 }
