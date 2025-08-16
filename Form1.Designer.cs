@@ -60,14 +60,19 @@
             txtHobbies = new Label();
             lblHobbiesError = new Label();
             lbHobbies = new CheckedListBox();
+            menuStrip = new MenuStrip();
+            lblUserName = new Label();
+            settingsToolStripMenuItem = new ToolStripMenuItem();
+            menuLogout = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)pbStudent).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvStudents).BeginInit();
+            menuStrip.SuspendLayout();
             SuspendLayout();
             // 
             // cmbCourse
             // 
             cmbCourse.FormattingEnabled = true;
-            cmbCourse.Location = new Point(140, 205);
+            cmbCourse.Location = new Point(141, 233);
             cmbCourse.Name = "cmbCourse";
             cmbCourse.Size = new Size(154, 23);
             cmbCourse.TabIndex = 2;
@@ -76,7 +81,7 @@
             // rbFemale
             // 
             rbFemale.AutoSize = true;
-            rbFemale.Location = new Point(209, 170);
+            rbFemale.Location = new Point(210, 198);
             rbFemale.Name = "rbFemale";
             rbFemale.Size = new Size(57, 19);
             rbFemale.TabIndex = 1022;
@@ -88,7 +93,7 @@
             // rbMale
             // 
             rbMale.AutoSize = true;
-            rbMale.Location = new Point(140, 170);
+            rbMale.Location = new Point(141, 198);
             rbMale.Name = "rbMale";
             rbMale.Size = new Size(51, 19);
             rbMale.TabIndex = 1021;
@@ -99,7 +104,7 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(136, 451);
+            btnSave.Location = new Point(137, 479);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(126, 39);
             btnSave.TabIndex = 1015;
@@ -109,7 +114,7 @@
             // 
             // txtFee
             // 
-            txtFee.Location = new Point(137, 131);
+            txtFee.Location = new Point(138, 159);
             txtFee.Name = "txtFee";
             txtFee.ReadOnly = true;
             txtFee.Size = new Size(157, 23);
@@ -118,7 +123,7 @@
             // 
             // txtFullName
             // 
-            txtFullName.Location = new Point(137, 83);
+            txtFullName.Location = new Point(138, 111);
             txtFullName.Name = "txtFullName";
             txtFullName.ReadOnly = true;
             txtFullName.Size = new Size(157, 23);
@@ -127,7 +132,7 @@
             // 
             // txtLastName
             // 
-            txtLastName.Location = new Point(137, 54);
+            txtLastName.Location = new Point(138, 82);
             txtLastName.Name = "txtLastName";
             txtLastName.Size = new Size(157, 23);
             txtLastName.TabIndex = 1014;
@@ -136,7 +141,7 @@
             // txtFirstName
             // 
             txtFirstName.AccessibleName = "";
-            txtFirstName.Location = new Point(137, 29);
+            txtFirstName.Location = new Point(138, 57);
             txtFirstName.Name = "txtFirstName";
             txtFirstName.Size = new Size(157, 23);
             txtFirstName.TabIndex = 1012;
@@ -146,7 +151,7 @@
             // 
             txtCourse.AutoSize = true;
             txtCourse.Font = new Font("Segoe UI", 11F);
-            txtCourse.Location = new Point(39, 204);
+            txtCourse.Location = new Point(40, 232);
             txtCourse.Name = "txtCourse";
             txtCourse.Size = new Size(54, 20);
             txtCourse.TabIndex = 1011;
@@ -156,7 +161,7 @@
             // 
             lblGender.AutoSize = true;
             lblGender.Font = new Font("Segoe UI", 11F);
-            lblGender.Location = new Point(42, 170);
+            lblGender.Location = new Point(43, 198);
             lblGender.Name = "lblGender";
             lblGender.Size = new Size(57, 20);
             lblGender.TabIndex = 1010;
@@ -166,7 +171,7 @@
             // 
             lblFee.AutoSize = true;
             lblFee.Font = new Font("Segoe UI", 11F);
-            lblFee.Location = new Point(39, 131);
+            lblFee.Location = new Point(40, 159);
             lblFee.Name = "lblFee";
             lblFee.Size = new Size(87, 20);
             lblFee.TabIndex = 1009;
@@ -176,7 +181,7 @@
             // 
             lblFullName.AutoSize = true;
             lblFullName.Font = new Font("Segoe UI", 11F);
-            lblFullName.Location = new Point(39, 87);
+            lblFullName.Location = new Point(40, 115);
             lblFullName.Name = "lblFullName";
             lblFullName.Size = new Size(76, 20);
             lblFullName.TabIndex = 1008;
@@ -187,7 +192,7 @@
             lblLastNameError.AutoSize = true;
             lblLastNameError.Font = new Font("Segoe UI", 11F);
             lblLastNameError.ForeColor = Color.Red;
-            lblLastNameError.Location = new Point(327, 57);
+            lblLastNameError.Location = new Point(328, 85);
             lblLastNameError.Name = "lblLastNameError";
             lblLastNameError.Size = new Size(153, 20);
             lblLastNameError.TabIndex = 1007;
@@ -199,7 +204,7 @@
             // 
             lblLastName.AutoSize = true;
             lblLastName.Font = new Font("Segoe UI", 11F);
-            lblLastName.Location = new Point(39, 57);
+            lblLastName.Location = new Point(40, 85);
             lblLastName.Name = "lblLastName";
             lblLastName.Size = new Size(79, 20);
             lblLastName.TabIndex = 1006;
@@ -211,7 +216,7 @@
             lblFirstNameError.BackColor = SystemColors.Control;
             lblFirstNameError.Font = new Font("Segoe UI", 11F);
             lblFirstNameError.ForeColor = Color.Red;
-            lblFirstNameError.Location = new Point(326, 32);
+            lblFirstNameError.Location = new Point(327, 60);
             lblFirstNameError.Name = "lblFirstNameError";
             lblFirstNameError.Size = new Size(154, 20);
             lblFirstNameError.TabIndex = 1013;
@@ -223,7 +228,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 11F);
-            label5.Location = new Point(39, 28);
+            label5.Location = new Point(40, 56);
             label5.Name = "label5";
             label5.Size = new Size(80, 20);
             label5.TabIndex = 1005;
@@ -231,7 +236,7 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(281, 451);
+            btnCancel.Location = new Point(282, 479);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(109, 39);
             btnCancel.TabIndex = 1023;
@@ -244,7 +249,7 @@
             lblCourseError.AutoSize = true;
             lblCourseError.Font = new Font("Segoe UI", 11F);
             lblCourseError.ForeColor = Color.Red;
-            lblCourseError.Location = new Point(326, 208);
+            lblCourseError.Location = new Point(327, 236);
             lblCourseError.Name = "lblCourseError";
             lblCourseError.Size = new Size(170, 20);
             lblCourseError.TabIndex = 1007;
@@ -255,7 +260,7 @@
             // chkAgree
             // 
             chkAgree.AutoSize = true;
-            chkAgree.Location = new Point(136, 402);
+            chkAgree.Location = new Point(137, 430);
             chkAgree.Name = "chkAgree";
             chkAgree.Size = new Size(176, 19);
             chkAgree.TabIndex = 1024;
@@ -265,7 +270,7 @@
             // 
             // pbStudent
             // 
-            pbStudent.Location = new Point(619, 27);
+            pbStudent.Location = new Point(620, 55);
             pbStudent.Name = "pbStudent";
             pbStudent.Size = new Size(143, 124);
             pbStudent.TabIndex = 1025;
@@ -273,7 +278,7 @@
             // 
             // btnUpload
             // 
-            btnUpload.Location = new Point(595, 201);
+            btnUpload.Location = new Point(596, 229);
             btnUpload.Name = "btnUpload";
             btnUpload.Size = new Size(88, 27);
             btnUpload.TabIndex = 1026;
@@ -283,7 +288,7 @@
             // 
             // btnRemove
             // 
-            btnRemove.Location = new Point(689, 201);
+            btnRemove.Location = new Point(690, 229);
             btnRemove.Name = "btnRemove";
             btnRemove.Size = new Size(82, 27);
             btnRemove.TabIndex = 1027;
@@ -293,7 +298,7 @@
             // 
             // txtImage
             // 
-            txtImage.Location = new Point(604, 166);
+            txtImage.Location = new Point(605, 194);
             txtImage.Name = "txtImage";
             txtImage.Size = new Size(167, 23);
             txtImage.TabIndex = 1028;
@@ -307,7 +312,7 @@
             dgvStudents.AllowUserToAddRows = false;
             dgvStudents.AllowUserToDeleteRows = false;
             dgvStudents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvStudents.Location = new Point(38, 524);
+            dgvStudents.Location = new Point(39, 552);
             dgvStudents.Name = "dgvStudents";
             dgvStudents.ReadOnly = true;
             dgvStudents.Size = new Size(723, 238);
@@ -318,7 +323,7 @@
             lblDOBError.AutoSize = true;
             lblDOBError.Font = new Font("Segoe UI", 11F);
             lblDOBError.ForeColor = Color.Red;
-            lblDOBError.Location = new Point(363, 252);
+            lblDOBError.Location = new Point(364, 280);
             lblDOBError.Name = "lblDOBError";
             lblDOBError.Size = new Size(114, 20);
             lblDOBError.TabIndex = 1007;
@@ -330,7 +335,7 @@
             // 
             lblDOB.AutoSize = true;
             lblDOB.Font = new Font("Segoe UI", 11F);
-            lblDOB.Location = new Point(39, 247);
+            lblDOB.Location = new Point(40, 275);
             lblDOB.Name = "lblDOB";
             lblDOB.Size = new Size(40, 20);
             lblDOB.TabIndex = 1011;
@@ -338,7 +343,7 @@
             // 
             // dtpDOB
             // 
-            dtpDOB.Location = new Point(137, 249);
+            dtpDOB.Location = new Point(138, 277);
             dtpDOB.Name = "dtpDOB";
             dtpDOB.Size = new Size(200, 23);
             dtpDOB.TabIndex = 1030;
@@ -349,7 +354,7 @@
             lblAgreeError.AutoSize = true;
             lblAgreeError.Font = new Font("Segoe UI", 11F);
             lblAgreeError.ForeColor = Color.Red;
-            lblAgreeError.Location = new Point(322, 399);
+            lblAgreeError.Location = new Point(323, 427);
             lblAgreeError.Name = "lblAgreeError";
             lblAgreeError.Size = new Size(251, 20);
             lblAgreeError.TabIndex = 1007;
@@ -361,7 +366,7 @@
             // 
             txtHobbies.AutoSize = true;
             txtHobbies.Font = new Font("Segoe UI", 11F);
-            txtHobbies.Location = new Point(39, 289);
+            txtHobbies.Location = new Point(40, 317);
             txtHobbies.Name = "txtHobbies";
             txtHobbies.Size = new Size(68, 20);
             txtHobbies.TabIndex = 1011;
@@ -372,7 +377,7 @@
             lblHobbiesError.AutoSize = true;
             lblHobbiesError.Font = new Font("Segoe UI", 11F);
             lblHobbiesError.ForeColor = Color.Red;
-            lblHobbiesError.Location = new Point(363, 329);
+            lblHobbiesError.Location = new Point(364, 357);
             lblHobbiesError.Name = "lblHobbiesError";
             lblHobbiesError.Size = new Size(178, 20);
             lblHobbiesError.TabIndex = 1007;
@@ -383,17 +388,50 @@
             // lbHobbies
             // 
             lbHobbies.FormattingEnabled = true;
-            lbHobbies.Location = new Point(137, 289);
+            lbHobbies.Location = new Point(138, 317);
             lbHobbies.Name = "lbHobbies";
             lbHobbies.Size = new Size(200, 94);
             lbHobbies.TabIndex = 1031;
             lbHobbies.SelectedIndexChanged += lbHobbies_SelectedIndexChanged_1;
+            // 
+            // menuStrip
+            // 
+            menuStrip.Items.AddRange(new ToolStripItem[] { settingsToolStripMenuItem });
+            menuStrip.Location = new Point(0, 0);
+            menuStrip.Name = "menuStrip";
+            menuStrip.Size = new Size(800, 24);
+            menuStrip.TabIndex = 1032;
+            menuStrip.Text = "menuStrip1";
+            // 
+            // lblUserName
+            // 
+            lblUserName.AutoSize = true;
+            lblUserName.Location = new Point(724, 24);
+            lblUserName.Name = "lblUserName";
+            lblUserName.Size = new Size(38, 15);
+            lblUserName.TabIndex = 1033;
+            lblUserName.Text = "label1";
+            // 
+            // settingsToolStripMenuItem
+            // 
+            settingsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { menuLogout });
+            settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            settingsToolStripMenuItem.Size = new Size(61, 20);
+            settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // menuLogout
+            // 
+            menuLogout.Name = "menuLogout";
+            menuLogout.Size = new Size(180, 22);
+            menuLogout.Text = "Logout";
+            menuLogout.Click += menuLogout_Click;
             // 
             // StudentForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 802);
+            Controls.Add(lblUserName);
             Controls.Add(lbHobbies);
             Controls.Add(dtpDOB);
             Controls.Add(dgvStudents);
@@ -425,11 +463,15 @@
             Controls.Add(lblLastName);
             Controls.Add(lblFirstNameError);
             Controls.Add(label5);
+            Controls.Add(menuStrip);
+            MainMenuStrip = menuStrip;
             Name = "StudentForm";
             Text = "Student Form";
             Load += StudentForm_Load;
             ((System.ComponentModel.ISupportInitialize)pbStudent).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvStudents).EndInit();
+            menuStrip.ResumeLayout(false);
+            menuStrip.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -469,5 +511,9 @@
         private Label txtHobbies;
         private Label lblHobbiesError;
         private CheckedListBox lbHobbies;
+        private MenuStrip menuStrip;
+        private Label lblUserName;
+        private ToolStripMenuItem settingsToolStripMenuItem;
+        private ToolStripMenuItem menuLogout;
     }
 }

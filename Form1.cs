@@ -325,7 +325,11 @@ namespace WinFormsApp1
             RemoveImage();
             _uploadedFile = "";
             dtpDOB.CustomFormat = " ";
-            lbHobbies.SelectedItems.Clear();
+            // lbHobbies.SelectedItems.Clear();
+            for (int i = 0; i < lbHobbies.Items.Count; i++)
+            {
+                lbHobbies.SetItemChecked(i, false);
+            }
             txtFirstName.Focus();
         }
 
@@ -397,6 +401,11 @@ namespace WinFormsApp1
             {
                 lblHobbiesError.Visible = false;
             }
+        }
+
+        private void menuLogout_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
