@@ -438,11 +438,12 @@
             // lblSearch
             // 
             lblSearch.AutoSize = true;
-            lblSearch.Location = new Point(595, 526);
+            lblSearch.Font = new Font("Segoe UI", 12F);
+            lblSearch.Location = new Point(592, 523);
             lblSearch.Name = "lblSearch";
-            lblSearch.Size = new Size(42, 15);
+            lblSearch.Size = new Size(60, 21);
             lblSearch.TabIndex = 1035;
-            lblSearch.Text = "Search";
+            lblSearch.Text = "Search:";
             // 
             // StudentForm
             // 

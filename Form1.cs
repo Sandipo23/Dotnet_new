@@ -89,6 +89,13 @@ namespace WinFormsApp1
                 CellTemplate = new DataGridViewTextBoxCell(),
                 DataPropertyName = nameof(StudentRead.Profile)
             });
+            dgvStudents.Columns.Add(new DataGridViewColumn
+            {
+                Name = nameof(StudentRead.CreatedDate),
+                HeaderText = "Created Date",
+                CellTemplate = new DataGridViewTextBoxCell(),
+                DataPropertyName = nameof(StudentRead.CreatedDate)
+            });
             LoadStudents();
         }
 
@@ -143,6 +150,7 @@ namespace WinFormsApp1
             txtImage.Enabled = false; // not be able to copy the text in the image box i.e read only
             dtpDOB.Format = DateTimePickerFormat.Custom;
             dtpDOB.CustomFormat = " ";  // suru ma empty date dekhauxa
+
             //lbHobbies.SelectionMode = SelectionMode.MultiSimple;  // thic code is for listbox not checked listbox
             lbHobbies.CheckOnClick = true;
         }

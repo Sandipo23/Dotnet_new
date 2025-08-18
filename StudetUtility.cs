@@ -23,7 +23,8 @@ namespace WinFormsApp1
                     Course = student.Course,
                     //  DOB = student.DOB,
                     DOB = student.DOB.ToString(Constants.Format),
-                    Profile = Path.GetFileName(student.Profile)
+                    Profile = Path.GetFileName(student.Profile),
+                    CreatedDate = student.CreatedDate.GetDateTimeFormats().First(),
                 });
             }
 

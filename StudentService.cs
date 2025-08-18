@@ -106,7 +106,9 @@ namespace WinFormsApp1
             {
                 string json = File.ReadAllText(path);
                 var students = JsonConvert.DeserializeObject<List<Student>>(json);   // data stored from saved json file to students variable
-                return students;
+                return students
+                    .OrderByDescending(x => x.CreatedDate)
+                       .ToList();
             }
 
             return new List<Student>();
