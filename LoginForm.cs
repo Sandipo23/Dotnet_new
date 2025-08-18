@@ -53,6 +53,7 @@ namespace WinFormsApp1
             if (_userName == userName && _password == password)
             {
                 StudentForm studentForm = new StudentForm();
+                studentForm.SetUserName(userName);
                 studentForm.Show();
                 Hide();
             }

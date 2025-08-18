@@ -1,4 +1,6 @@
 using System.Windows.Forms;
+using System;
+using System.IO;
 
 namespace WinFormsApp1
 {
@@ -6,6 +8,8 @@ namespace WinFormsApp1
     {
         private readonly StudentService _studentService;
         private string _uploadedFile;
+        private string _userName;
+        private List<StudentRead> _students = new List<StudentRead>();
 
         public StudentForm()
         {
@@ -18,6 +22,12 @@ namespace WinFormsApp1
             //LoadFormData();  // to show the data thst is saved in json file in our form
             LoadStudentsGrid();
             LoadHobbies();
+        }
+
+        public void SetUserName(string userName)
+        {
+            _userName = userName;
+            lblUserName.Text = $"Welcome, {_userName}";
         }
 
         private void LoadHobbies()
@@ -84,10 +94,15 @@ namespace WinFormsApp1
 
         private void LoadStudents()
         {
-            var students = _studentService.GetAll();
-            if (students.Count > 0)
+            //var students = _studentService.GetAll();
+            //if (students.Count > 0)
+            //{
+            //    dgvStudents.DataSource = students;
+            //}
+            _students = _studentService.GetAll();
+            if (_students.Count > 0)
             {
-                dgvStudents.DataSource = students;
+                dgvStudents.DataSource = _students;
             }
         }
 
@@ -406,6 +421,21 @@ namespace WinFormsApp1
         private void menuLogout_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            string search = txtSearch.Text.Trim();
+            if (String.IsNullOrEmpty(search))
+            {
+                dgvStudents.DataSource = _students;
+                return;
+            }
+
+            var filtered = _students
+                           .Where(x => x.FirstName.Contains(search, StringComparison.OrdinalIgnoreCase))
+                           .ToList();
+            dgvStudents.DataSource = filtered;
         }
     }
 }
