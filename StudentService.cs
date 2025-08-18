@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace WinFormsApp1
 {
-    internal class StudentService
+    internal class StudentService : IStudentReadService, IStudentWriteService
     {
         // Fields
         private int _id;
@@ -21,14 +21,22 @@ namespace WinFormsApp1
         //public const string _format = "dd/MM/yyyy";
 
         // Readonly
-        public readonly string _folderLocation;
+        //  public readonly string _folderLocation;
 
         private readonly string path;
 
+        public string FilePath
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["FolderLocation"];
+            }
+        }
+
         public StudentService()
         {
-            _folderLocation = ConfigurationManager.AppSettings["FolderLocation"];
-            path = Path.Combine(_folderLocation, "student.json");
+            // _folderLocation = ConfigurationManager.AppSettings["FolderLocation"];
+            path = Path.Combine(FilePath, "student.json");
         }
 
         public string[] GetAllCourses()
@@ -68,7 +76,7 @@ namespace WinFormsApp1
             var existingStudents = GetExistingStudents();
             existingStudents.Add(student);
             string json = JsonConvert.SerializeObject(existingStudents);
-            string path = Path.Combine(_folderLocation, "student.json");  // used path combine  for cross platform compatibility
+            string path = Path.Combine(FilePath, "student.json");  // used path combine  for cross platform compatibility
             File.WriteAllText(path, json);
         }
 
@@ -101,7 +109,7 @@ namespace WinFormsApp1
 
         private List<Student> GetExistingStudents()
         {
-            string path = Path.Combine(_folderLocation, "student.json");
+            string path = Path.Combine(FilePath, "student.json");
             if (File.Exists(path))
             {
                 string json = File.ReadAllText(path);

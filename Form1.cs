@@ -6,14 +6,18 @@ namespace WinFormsApp1
 {
     public partial class StudentForm : Form
     {
-        private readonly StudentService _studentService;
+        //private readonly StudentService _studentService;
+        private readonly IStudentReadService _studentReadService;
+
+        private readonly IStudentWriteService _studentWriteService;
         private string _uploadedFile;
         private string _userName;
         private List<StudentRead> _students = new List<StudentRead>();
 
         public StudentForm()
         {
-            _studentService = new StudentService();
+            _studentReadService = new StudentService();
+            _studentWriteService = new StudentService();
             InitializeComponent();
             InitializeFormComponent();
 
@@ -32,7 +36,7 @@ namespace WinFormsApp1
 
         private void LoadHobbies()
         {
-            string[] hobbies = _studentService.GetAllHobbies();
+            string[] hobbies = _studentReadService.GetAllHobbies();
             lbHobbies.Items.AddRange(hobbies);
         }
 
@@ -106,7 +110,7 @@ namespace WinFormsApp1
             //{
             //    dgvStudents.DataSource = students;
             //}
-            _students = _studentService.GetAll();
+            _students = _studentReadService.GetAll();
             if (_students.Count > 0)
             {
                 dgvStudents.DataSource = _students;
@@ -170,7 +174,7 @@ namespace WinFormsApp1
             //cmbCourse.Items.Add("BBA");
 
             // var studentService = new StudentService();   // object of class StudentService is made
-            string[] courses = _studentService.GetAllCourses();  // the return in the class SrudentServide will return in GetAllCourses and stores the items in courses
+            string[] courses = _studentReadService.GetAllCourses();  // the return in the class SrudentServide will return in GetAllCourses and stores the items in courses
 
             // 3rd syntax
             //for (int i = 0; i < courses.Length; i++)
@@ -311,7 +315,7 @@ namespace WinFormsApp1
                 lblHobbiesError.Visible = false;
             }
             //string imagePath = Path.Combine(_studentService._folderLocation, txtImage.Text);  // to store and retreive the image path
-            string imagePath = String.IsNullOrEmpty(txtImage.Text) ? null : Path.Combine(_studentService._folderLocation, txtImage.Text);
+            string imagePath = String.IsNullOrEmpty(txtImage.Text) ? null : Path.Combine(_studentReadService.FilePath, txtImage.Text);
             if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName) && cmbCourse.SelectedIndex > 0 && agree && !String.IsNullOrEmpty(dob) && hobbies.Length > 0)
             {
                 //StudentService studentService = new StudentService();
@@ -326,10 +330,10 @@ namespace WinFormsApp1
                     Profile = imagePath,
                     Hobbies = hobbies
                 };
-                _studentService.Save(student);  // student ko info save gareko so that json ma save garauma
+                _studentWriteService.Save(student);  // student ko info save gareko so that json ma save garauma
                 if (!String.IsNullOrEmpty(_uploadedFile) && !String.IsNullOrEmpty(txtImage.Text))
                 {
-                    _studentService.SaveImage(_uploadedFile, imagePath);
+                    _studentWriteService.SaveImage(_uploadedFile, imagePath);
                 }
                 LoadStudents();
                 MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
