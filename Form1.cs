@@ -174,18 +174,16 @@ namespace WinFormsApp1
             //cmbCourse.Items.Add("BBA");
 
             // var studentService = new StudentService();   // object of class StudentService is made
-            string[] courses = _studentReadService.GetAllCourses();  // the return in the class SrudentServide will return in GetAllCourses and stores the items in courses
+            List<Course> courses = _studentReadService.GetAllCourses();  // the return in the class StudentServide will return in GetAllCourses and stores the items in courses
 
-            // 3rd syntax
-            //for (int i = 0; i < courses.Length; i++)
-            //{
-            //    cmbCourse.Items.Add(courses[i]);
-            //}
-
-            // 4th syntax
-            cmbCourse.Items.AddRange(courses);    // Addrange can take object of array
-
-            cmbCourse.SelectedIndex = 0;  // selecting the index 0 i.e please select the course
+            courses.Insert(0, new Course
+            {
+                Id = 0,
+                Name = "Please select a course"
+            });
+            cmbCourse.DataSource = courses;
+            cmbCourse.DisplayMember = nameof(Course.Name);
+            cmbCourse.ValueMember = nameof(Course.Id);
         }
 
         private void txtFirstName_TextChanged(object sender, EventArgs e)

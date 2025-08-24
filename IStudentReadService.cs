@@ -10,7 +10,7 @@ namespace WinFormsApp1
     {
         string FilePath { get; }
 
-        string[] GetAllCourses();
+        List<Course> GetAllCourses();
 
         string[] GetAllHobbies();
 

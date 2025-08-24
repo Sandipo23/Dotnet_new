@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.VisualBasic.Devices;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -24,6 +26,7 @@ namespace WinFormsApp1
         //  public readonly string _folderLocation;
 
         private readonly string path;
+        private readonly string _connectionString;
 
         public string FilePath
         {
@@ -37,28 +40,49 @@ namespace WinFormsApp1
         {
             // _folderLocation = ConfigurationManager.AppSettings["FolderLocation"];
             path = Path.Combine(FilePath, "student.json");
+            _connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         }
 
-        public string[] GetAllCourses()
+        public List<Course> GetAllCourses()
         {
-            // 1st syntax
-            //string[] courses = new string[6];
-            //courses[0] = "Please select a course";
-            //courses[1] = "BCA";
-            //courses[2] = "BIT";
-            //courses[3] = "BIM";
-            //courses[4] = "BBA";
-            //courses[5] = "BBS";
+            var courses = new List<Course>();
+            using (var con = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT Id, Name FROM Course;";
+                using (var cmd = new SqlCommand(query, con))
+                {
+                    try
+                    {
+                        con.Open();
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (!reader.HasRows)
+                                return courses;
 
-            // 2nd syntax
-            //string[] courses = new string[6] { "Please select a course", "BCA", "BIT", "BIM", "BBA", "BBS" };
+                            while (reader.Read())
+                            {
+                                int id = (int)reader["Id"];
+                                string name = reader["Name"].ToString();
+                                courses.Add(new Course
+                                {
+                                    Id = id,
+                                    Name = name
+                                });
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw;
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
 
-            // 3rd syntax
-            //string[] courses = new string[] { "Please select a course", "BCA", "BIT", "BIM", "BBA", "BBS" };
-
-            // 4th syntax
-            string[] abc = { "Please select a course", "BCA", "BIT", "BIM", "BBA", "BBS" };
-            return abc;
+                return courses;
+            }
         }
 
         public string[] GetAllHobbies()
