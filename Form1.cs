@@ -36,8 +36,11 @@ namespace WinFormsApp1
 
         private void LoadHobbies()
         {
-            string[] hobbies = _studentReadService.GetAllHobbies();
-            lbHobbies.Items.AddRange(hobbies);
+            var hobbies = _studentReadService.GetAllHobbies();
+            lbHobbies.DataSource = hobbies;
+            lbHobbies.DisplayMember = nameof(Course.Name);
+            lbHobbies.ValueMember = nameof(Course.Id);
+            //   lbHobbies.Items.AddRange(hobbies);   this is previous code loading from hobbies list
         }
 
         private void LoadStudentsGrid()

@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -85,10 +86,26 @@ namespace WinFormsApp1
             }
         }
 
-        public string[] GetAllHobbies()
+        public DataTable GetAllHobbies()
         {
-            string[] hobbies = { "Music", "Dance", "Hiking", "Programming", "Swimming" };
-            return hobbies;
+            var table = new DataTable();
+            using (var con = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT * FROM Hobby;";
+                using (var adapter = new SqlDataAdapter(query, con))
+                {
+                    try
+                    {
+                        adapter.Fill(table);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw;
+                    }
+                }
+
+                return table;
+            }
         }
 
         public void Save(Student student)     //student property ma vayeko information yeta pass hunxa
