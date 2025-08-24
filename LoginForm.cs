@@ -13,15 +13,13 @@ namespace WinFormsApp1
 {
     public partial class LoginForm : Form
     {
-        private readonly string _userName;
-        private readonly string _password;
+        private readonly ILoginService _loginService;
 
         public LoginForm()
         {
+            _loginService = new LoginService();
             InitializeComponent();
             InitializeFormComponents();
-            _userName = ConfigurationManager.AppSettings["UserName"];
-            _password = ConfigurationManager.AppSettings["Password"];
         }
 
         private void InitializeFormComponents()
@@ -50,7 +48,7 @@ namespace WinFormsApp1
                 ResetControls();
                 return;
             }
-            if (_userName == userName && _password == password)
+            if ((_loginService.Login(userName, password)))
             {
                 StudentForm studentForm = new StudentForm();
                 studentForm.SetUserName(userName);
