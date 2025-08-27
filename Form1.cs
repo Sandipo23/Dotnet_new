@@ -46,7 +46,16 @@ namespace WinFormsApp1
         private void LoadStudentsGrid()
         {
             dgvStudents.AutoGenerateColumns = false;
-            dgvStudents.Columns.Add(new DataGridViewColumn   // it is for changing the name of the column
+            dgvStudents.Columns.Add(new DataGridViewColumn
+
+            // it is for changing the name of the column
+            {
+                Name = nameof(StudentRead.Id),
+                HeaderText = "Id",
+                CellTemplate = new DataGridViewTextBoxCell(),
+                DataPropertyName = nameof(StudentRead.Id)
+            });
+            dgvStudents.Columns.Add(new DataGridViewColumn
             {
                 Name = nameof(StudentRead.FirstName),
                 HeaderText = "First Name",                        // actual showing name in the grid

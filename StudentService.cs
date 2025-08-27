@@ -128,24 +128,78 @@ namespace WinFormsApp1
 
         public List<StudentRead> GetAll()
         {
-            //string path = Path.Combine(_folderLocation, "student.json");  //this is to convert the json file to object/data to show in out file
-            //if (File.Exists(path))
-            //{
-            //    string json = File.ReadAllText(path);  //json ko data string ma lauxa
-            //    var students = JsonConvert.DeserializeObject<List<Student>>(json);
-            //    return students;
-            //}
-
-            //return new List<Student>();
-
-            var studentList = GetExistingStudents();
-            if (studentList.Count > 0)
+            var students = new List<StudentRead>();
+            using (var con = new SqlConnection(_connectionString))
             {
-                var students = StudentUtility.ConvertToStudentRead(studentList);   // yo data grid ma dekhauna ko lagi ho ,data yeta aaunai parxa
-                return students;
-            }
+                string query = @"SELECT s.Id, s.FirstName, s.LastName, s.Gender, s.Agree, s.DOB, s.Profile, s.CreatedDate, c.Name Course
+                                 FROM Student s
+                                 JOIN Course c ON s.CourseId = c.Id;";
+                using (var cmd = new SqlCommand(query, con))
+                {
+                    try
+                    {
+                        con.Open();
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (!reader.HasRows)
+                                return students;
 
-            return new List<StudentRead>();
+                            while (reader.Read())
+                            {
+                                int id = (int)reader[nameof(StudentRead.Id)];
+                                string firstName = reader[nameof(StudentRead.FirstName)].ToString();
+                                string lastName = reader[nameof(StudentRead.LastName)].ToString();
+                                bool gender = (bool)reader[nameof(StudentRead.Gender)];
+                                bool agree = (bool)reader[nameof(StudentRead.Agree)];
+                                string course = reader[nameof(StudentRead.Course)].ToString();
+                                DateTime dob = (DateTime)reader[nameof(StudentRead.DOB)];
+                                DateTime createdDate = (DateTime)reader[nameof(StudentRead.CreatedDate)];
+                                string profile = reader[nameof(StudentRead.Profile)].ToString();
+                                students.Add(new StudentRead
+                                {
+                                    Id = id,
+                                    FirstName = firstName,
+                                    LastName = lastName,
+                                    Gender = gender ? "Male" : "Female",
+                                    Agree = agree ? "Yes" : "No",
+                                    Course = course,
+                                    DOB = dob.FormatDate(),
+                                    CreatedDate = createdDate.FormatDate(),
+                                    Profile = Path.GetFileNameWithoutExtension(profile)
+                                });
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw;
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+
+                return students;
+                //string path = Path.Combine(_folderLocation, "student.json");  //this is to convert the json file to object/data to show in out file
+                //if (File.Exists(path))
+                //{
+                //    string json = File.ReadAllText(path);  //json ko data string ma lauxa
+                //    var students = JsonConvert.DeserializeObject<List<Student>>(json);
+                //    return students;
+                //}
+
+                //return new List<Student>();
+
+                //var studentList = GetExistingStudents();
+                //if (studentList.Count > 0)
+                //{
+                //    var students = StudentUtility.ConvertToStudentRead(studentList);   // yo data grid ma dekhauna ko lagi ho ,data yeta aaunai parxa
+                //    return students;
+                // }
+
+                // return new List<StudentRead>();
+            }
         }
 
         private List<Student> GetExistingStudents()

@@ -22,7 +22,8 @@ namespace WinFormsApp1
                     Agree = student.Agree ? "Yes" : "No",
                     Course = student.Course,
                     //  DOB = student.DOB,
-                    DOB = student.DOB.ToString(Constants.Format),
+                    // DOB = student.DOB.ToString(Constants.Format), // this is old method without use of extention method
+                    DOB = student.DOB.FormatDate(),             //this is new methof with using extention method
                     Profile = Path.GetFileName(student.Profile),
                     CreatedDate = student.CreatedDate.GetDateTimeFormats().First(),
                 });
