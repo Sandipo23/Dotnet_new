@@ -9,8 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <ProjectReference Include="..\InputForm.DAL\InputForm.DAL.csproj" />
   </ItemGroup>
+
+  
 
 </Project>
