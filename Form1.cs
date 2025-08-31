@@ -1,7 +1,8 @@
-using System.Windows.Forms;
-using System;
-using System.IO;
 using InputForm.DAL;
+using System;
+using System.Data;
+using System.IO;
+using System.Windows.Forms;
 
 namespace WinFormsApp1
 {
@@ -267,12 +268,21 @@ namespace WinFormsApp1
             string firstName = txtFirstName.Text.Trim();
             string lastName = txtLastName.Text.Trim();
             bool gender = rbMale.Checked;
-            string course = cmbCourse.Text;
+
+            //string course = cmbCourse.Text;
+            int courseId = (int)cmbCourse.SelectedValue;
             bool agree = chkAgree.Checked;
             string dob = dtpDOB.Text.Trim();
             //string[] hobbies = lbHobbies.SelectedItems.Cast<string>().ToArray();  this is for listbox
-            string[] hobbies = lbHobbies.CheckedItems.Cast<string>().ToArray();  // this is for checked list box - gives the data that user clicked
+            //string[] hobbies = lbHobbies.CheckedItems.Cast<string>().ToArray();  // this is for checked list box - gives the data that user clicked
 
+            var hobbies = lbHobbies
+                         .CheckedItems
+                         .Cast<DataRowView>()
+                         .Select(x => (int)x.Row[nameof(Course.Id)])
+                         .ToList();
+
+            string hobbyIds = String.Join(",", hobbies);
             if (String.IsNullOrEmpty(firstName))
             {
                 lblFirstNameError.Visible = true;
@@ -317,7 +327,7 @@ namespace WinFormsApp1
                 lblDOBError.Visible = false;
             }
 
-            if (hobbies.Length <= 0)
+            if (hobbies.Count <= 0)
             {
                 lblHobbiesError.Visible = true;
             }
@@ -327,7 +337,7 @@ namespace WinFormsApp1
             }
             //string imagePath = Path.Combine(_studentService._folderLocation, txtImage.Text);  // to store and retreive the image path
             string imagePath = String.IsNullOrEmpty(txtImage.Text) ? null : Path.Combine(_studentReadService.FilePath, txtImage.Text);
-            if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName) && cmbCourse.SelectedIndex > 0 && agree && !String.IsNullOrEmpty(dob) && hobbies.Length > 0)
+            if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName) && cmbCourse.SelectedIndex > 0 && agree && !String.IsNullOrEmpty(dob) && hobbies.Count > 0)
             {
                 //StudentService studentService = new StudentService();
                 Student student = new Student     //just property ma save garna lai object banako
@@ -336,10 +346,10 @@ namespace WinFormsApp1
                     LastName = lastName,
                     Gender = gender,
                     Agree = agree,
-                    Course = course,
+                    CourseId = courseId,
                     DOB = dtpDOB.Value,
                     Profile = imagePath,
-                    Hobbies = hobbies
+                    HobbyIds = hobbyIds
                 };
                 _studentWriteService.Save(student);  // student ko info save gareko so that json ma save garauma
                 if (!String.IsNullOrEmpty(_uploadedFile) && !String.IsNullOrEmpty(txtImage.Text))
