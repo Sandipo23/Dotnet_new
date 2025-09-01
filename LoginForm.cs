@@ -1,4 +1,5 @@
-﻿using InputForm.DAL;
+﻿using InputForm.BAL;
+using InputForm.DAL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +15,7 @@ namespace WinFormsApp1
 {
     public partial class LoginForm : Form
     {
-        private readonly ILoginService _loginService;
+        private readonly LoginService _loginService;
 
         public LoginForm()
         {
