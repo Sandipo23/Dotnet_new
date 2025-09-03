@@ -39,7 +39,7 @@ namespace WinFormsApp1
             Application.Exit();
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private async void btnLogin_Click(object sender, EventArgs e)
         {
             string userName = txtUserName.Text.Trim();
             string password = txtPassword.Text.Trim();
@@ -50,7 +50,7 @@ namespace WinFormsApp1
                 ResetControls();
                 return;
             }
-            if ((_loginService.Login(userName, password)))
+            if (await _loginService.LoginAsync(userName, password))    // this is the code that returns 1/true if the username and password matches
             {
                 StudentForm studentForm = new StudentForm();
                 studentForm.SetUserName(userName);
