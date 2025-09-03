@@ -3,6 +3,7 @@ using InputForm.DAL;
 using System;
 using System.Data;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WinFormsApp1
@@ -23,12 +24,6 @@ namespace WinFormsApp1
             _studentWriteService = new StudentService();
             InitializeComponent();
             InitializeFormComponent();
-
-            LoadCourses();    // this is for array of course
-
-            //LoadFormData();  // to show the data thst is saved in json file in our form
-            LoadStudentsGrid();
-            LoadHobbies();
         }
 
         public void SetUserName(string userName)
@@ -37,16 +32,16 @@ namespace WinFormsApp1
             lblUserName.Text = $"Welcome, {_userName}";
         }
 
-        private void LoadHobbies()
+        private async Task LoadHobbiesAsync()
         {
-            var hobbies = _studentReadService.GetAllHobbies();
+            var hobbies = await _studentReadService.GetAllHobbiesAsync();
             lbHobbies.DataSource = hobbies;
             lbHobbies.DisplayMember = nameof(Course.Name);
             lbHobbies.ValueMember = nameof(Course.Id);
             //   lbHobbies.Items.AddRange(hobbies);   this is previous code loading from hobbies list
         }
 
-        private void LoadStudentsGrid()
+        private async Task LoadStudentsGridAsync()
         {
             dgvStudents.AutoGenerateColumns = false;
             dgvStudents.Columns.Add(new DataGridViewColumn
@@ -115,17 +110,17 @@ namespace WinFormsApp1
                 CellTemplate = new DataGridViewTextBoxCell(),
                 DataPropertyName = nameof(StudentRead.CreatedDate)
             });
-            LoadStudents();
+            await LoadStudentsAsync();
         }
 
-        private void LoadStudents()
+        private async Task LoadStudentsAsync()
         {
             //var students = _studentService.GetAll();
             //if (students.Count > 0)
             //{
             //    dgvStudents.DataSource = students;
             //}
-            _students = _studentReadService.GetAll();
+            _students = await _studentReadService.GetAllAsync();
             if (_students.Count > 0)
             {
                 dgvStudents.DataSource = _students;
@@ -174,7 +169,7 @@ namespace WinFormsApp1
             lbHobbies.CheckOnClick = true;
         }
 
-        public void LoadCourses()
+        public async Task LoadCoursesAsync()
 
         {
             //1st syntax
@@ -189,7 +184,7 @@ namespace WinFormsApp1
             //cmbCourse.Items.Add("BBA");
 
             // var studentService = new StudentService();   // object of class StudentService is made
-            List<Course> courses = _studentReadService.GetAllCourses();  // the return in the class StudentServide will return in GetAllCourses and stores the items in courses
+            var courses = await _studentReadService.GetAllCoursesAsync();  // the return in the class StudentServide will return in GetAllCourses and stores the items in courses
 
             courses.Insert(0, new Course
             {
@@ -253,9 +248,9 @@ namespace WinFormsApp1
             }
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private async void btnSave_Click(object sender, EventArgs e)
         {
-            Save();
+            await SaveAsync();
             // ResetControls();
         }
 
@@ -264,7 +259,7 @@ namespace WinFormsApp1
             ResetControls();
         }
 
-        private void Save()
+        private async Task SaveAsync()
         {
             string firstName = txtFirstName.Text.Trim();
             string lastName = txtLastName.Text.Trim();
@@ -279,8 +274,8 @@ namespace WinFormsApp1
 
             var hobbies = lbHobbies
                          .CheckedItems
-                         .Cast<DataRowView>()
-                         .Select(x => (int)x.Row[nameof(Course.Id)])
+                         .Cast<Hobby>()
+                          .Select(x => x.Id)
                          .ToList();
 
             string hobbyIds = String.Join(",", hobbies);
@@ -352,12 +347,12 @@ namespace WinFormsApp1
                     Profile = imagePath,
                     HobbyIds = hobbyIds
                 };
-                _studentWriteService.Save(student);  // student ko info save gareko so that json ma save garauma
+                await _studentWriteService.SaveAsync(student);  // student ko info save gareko so that json ma save garauma
                 if (!String.IsNullOrEmpty(_uploadedFile) && !String.IsNullOrEmpty(txtImage.Text))
                 {
                     _studentWriteService.SaveImage(_uploadedFile, imagePath);
                 }
-                LoadStudents();
+                await LoadStudentsAsync();
                 MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ResetControls();
             }
@@ -395,10 +390,6 @@ namespace WinFormsApp1
         }
 
         private void lblLastNameError_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void StudentForm_Load(object sender, EventArgs e)
         {
         }
 
@@ -470,6 +461,16 @@ namespace WinFormsApp1
                            .Where(x => x.FirstName.Contains(search, StringComparison.OrdinalIgnoreCase))
                            .ToList();
             dgvStudents.DataSource = filtered;
+        }
+
+        private async void StudentForm_Load(object sender, EventArgs e)
+        {
+            await LoadCoursesAsync();    // this is for array of course
+
+            //LoadFormData();  // to show the data thst is saved in json file in our form
+
+            await LoadHobbiesAsync();
+            await LoadStudentsGridAsync();
         }
     }
 }
