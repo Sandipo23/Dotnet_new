@@ -18,10 +18,10 @@ namespace WinFormsApp1
         private string _userName;
         private List<StudentRead> _students = new List<StudentRead>();
 
-        public StudentForm()
+        public StudentForm(IStudentReadService studentReadRepository, IStudentWriteService studentWriteRepository)
         {
-            _studentReadService = new StudentService();
-            _studentWriteService = new StudentService();
+            _studentReadService = studentReadRepository;
+            _studentWriteService = studentWriteRepository;
             InitializeComponent();
             InitializeFormComponent();
         }

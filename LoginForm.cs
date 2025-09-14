@@ -1,5 +1,6 @@
 ﻿using InputForm.BAL;
 using InputForm.DAL;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,11 +16,13 @@ namespace WinFormsApp1
 {
     public partial class LoginForm : Form
     {
-        private readonly LoginService _loginService;
+        private readonly ILoginService _loginService;
+        //  private readonly IServiceProvider _serviceProvider;
 
-        public LoginForm()
+        public LoginForm(ILoginService loginService)
         {
-            _loginService = new LoginService();
+            //  _serviceProvider = serviceProvider;
+            _loginService = loginService;
             InitializeComponent();
             InitializeFormComponents();
         }
@@ -52,7 +55,7 @@ namespace WinFormsApp1
             }
             if (await _loginService.LoginAsync(userName, password))    // this is the code that returns 1/true if the username and password matches
             {
-                StudentForm studentForm = new StudentForm();
+                StudentForm studentForm = Program.ServiceProvider.GetService<StudentForm>();
                 studentForm.SetUserName(userName);
                 studentForm.Show();
                 Hide();
