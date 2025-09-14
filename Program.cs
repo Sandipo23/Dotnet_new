@@ -1,9 +1,9 @@
+using InputForm.BAL;
+using InputForm.DAL;
+using InputForm.Desktop;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
-using InputForm.BAL;
-using InputForm.DAL;
 
 namespace WinFormsApp1
 {
@@ -37,21 +37,23 @@ namespace WinFormsApp1
              {
                  IConfiguration configuration = hostContext.Configuration;
                  string connectionString = configuration["ConnectionStrings:DefaultConnection"];
-
+                 services.AddDAL(connectionString);
+                 services.AddBAL();
+                 services.AddDestopLayer();
                  // Presentation
-                 services.AddScoped<LoginForm>();
-                 services.AddScoped<StudentForm>();
+                 //services.AddScoped<LoginForm>();
+                 //services.AddScoped<StudentForm>();
 
                  // BAL
-                 services.AddScoped<ILoginService, LoginService>();
-                 services.AddScoped<IStudentReadService, StudentService>();
-                 services.AddScoped<IStudentWriteService, StudentService>();
+                 //services.AddScoped<ILoginService, LoginService>();
+                 //services.AddScoped<IStudentReadService, StudentService>();
+                 //services.AddScoped<IStudentWriteService, StudentService>();
 
                  // DAL
-                 services.AddScoped<ILoginRepository, LoginRepository>();
-                 services.AddScoped<IDapperRepository>(x => new DapperRepository(connectionString));
-                 services.AddScoped<IStudentReadRepository, StudentRepository>();
-                 services.AddScoped<IStudentWriteRepository, StudentRepository>();
+                 //services.AddScoped<ILoginRepository, LoginRepository>();
+                 //services.AddScoped<IDapperRepository>(x => new DapperRepository(connectionString));
+                 //services.AddScoped<IStudentReadRepository, StudentRepository>();
+                 //services.AddScoped<IStudentWriteRepository, StudentRepository>();
              });
     }
 }
