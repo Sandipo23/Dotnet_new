@@ -1,0 +1,16 @@
+D:\Project_Dotnet\InputFormEF.BAL\bin\Debug\net8.0\InputFormEF.BAL.deps.json
+D:\Project_Dotnet\InputFormEF.BAL\bin\Debug\net8.0\InputFormEF.BAL.dll
+D:\Project_Dotnet\InputFormEF.BAL\bin\Debug\net8.0\InputFormEF.BAL.pdb
+D:\Project_Dotnet\InputFormEF.BAL\bin\Debug\net8.0\InputFormEF.DAL.dll
+D:\Project_Dotnet\InputFormEF.BAL\bin\Debug\net8.0\InputFormEF.DAL.pdb
+D:\Project_Dotnet\InputFormEF.BAL\obj\Debug\net8.0\InputFormEF.BAL.csproj.AssemblyReference.cache
+D:\Project_Dotnet\InputFormEF.BAL\obj\Debug\net8.0\InputFormEF.BAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project_Dotnet\InputFormEF.BAL\obj\Debug\net8.0\InputFormEF.BAL.AssemblyInfoInputs.cache
+D:\Project_Dotnet\InputFormEF.BAL\obj\Debug\net8.0\InputFormEF.BAL.AssemblyInfo.cs
+D:\Project_Dotnet\InputFormEF.BAL\obj\Debug\net8.0\InputFormEF.BAL.csproj.CoreCompileInputs.cache
+D:\Project_Dotnet\InputFormEF.BAL\obj\Debug\net8.0\InputFormEF.BAL.sourcelink.json
+D:\Project_Dotnet\InputFormEF.BAL\obj\Debug\net8.0\InputFor.53453A6A.Up2Date
+D:\Project_Dotnet\InputFormEF.BAL\obj\Debug\net8.0\InputFormEF.BAL.dll
+D:\Project_Dotnet\InputFormEF.BAL\obj\Debug\net8.0\refint\InputFormEF.BAL.dll
+D:\Project_Dotnet\InputFormEF.BAL\obj\Debug\net8.0\InputFormEF.BAL.pdb
+D:\Project_Dotnet\InputFormEF.BAL\obj\Debug\net8.0\ref\InputFormEF.BAL.dll

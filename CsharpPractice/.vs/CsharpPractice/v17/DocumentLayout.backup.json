@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "D:\\Project_Dotnet\\CsharpPractice\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{1C3282C8-059C-43BC-97B6-1BC8354E42C4}|CsharpPractice.csproj|d:\\project_dotnet\\csharppractice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C3282C8-059C-43BC-97B6-1BC8354E42C4}|CsharpPractice.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1C3282C8-059C-43BC-97B6-1BC8354E42C4}|CsharpPractice.csproj|d:\\project_dotnet\\csharppractice\\class11.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1C3282C8-059C-43BC-97B6-1BC8354E42C4}|CsharpPractice.csproj|solutionrelative:class11.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1C3282C8-059C-43BC-97B6-1BC8354E42C4}|CsharpPractice.csproj|d:\\project_dotnet\\csharppractice\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1C3282C8-059C-43BC-97B6-1BC8354E42C4}|CsharpPractice.csproj|solutionrelative:class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C3282C8-059C-43BC-97B6-1BC8354E42C4}|CsharpPractice.csproj|d:\\project_dotnet\\csharppractice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C3282C8-059C-43BC-97B6-1BC8354E42C4}|CsharpPractice.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1C3282C8-059C-43BC-97B6-1BC8354E42C4}|CsharpPractice.csproj|d:\\project_dotnet\\csharppractice\\csharppractice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -26,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,26 +38,25 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "class11.cs",
               "DocumentMoniker": "D:\\Project_Dotnet\\CsharpPractice\\class11.cs",
               "RelativeDocumentMoniker": "class11.cs",
               "ToolTip": "D:\\Project_Dotnet\\CsharpPractice\\class11.cs",
               "RelativeToolTip": "class11.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-26T14:43:21.048Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-26T14:43:21.048Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Project_Dotnet\\CsharpPractice\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "D:\\Project_Dotnet\\CsharpPractice\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-25T17:02:27.116Z",
               "EditorCaption": ""
@@ -76,7 +75,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Class1.cs",
               "DocumentMoniker": "D:\\Project_Dotnet\\CsharpPractice\\Class1.cs",
               "RelativeDocumentMoniker": "Class1.cs",
@@ -84,8 +83,7 @@
               "RelativeToolTip": "Class1.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-25T17:05:02.051Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-25T17:05:02.051Z"
             }
           ]
         }
