@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InputFormEF.DAL.Data
 {
-    internal class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
         public DbSet<Course> Courses { get; set; }
         public DbSet<Hobby> Hobbies { get; set; }

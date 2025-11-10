@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InputFormEF.DAL.Entities
 {
-    internal class StudentHobby
+    public class StudentHobby
     {
         public int StudentId { get; set; }
         public int HobbyId { get; set; }

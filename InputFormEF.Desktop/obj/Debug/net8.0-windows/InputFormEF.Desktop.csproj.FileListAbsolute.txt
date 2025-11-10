@@ -1,9 +1,3 @@
-D:\Project_Dotnet\InputFormEF.Desktop\obj\Debug\net8.0-windows\InputFormEF.Desktop.csproj.AssemblyReference.cache
-D:\Project_Dotnet\InputFormEF.Desktop\obj\Debug\net8.0-windows\InputFormEF.Desktop.GeneratedMSBuildEditorConfig.editorconfig
-D:\Project_Dotnet\InputFormEF.Desktop\obj\Debug\net8.0-windows\InputFormEF.Desktop.AssemblyInfoInputs.cache
-D:\Project_Dotnet\InputFormEF.Desktop\obj\Debug\net8.0-windows\InputFormEF.Desktop.AssemblyInfo.cs
-D:\Project_Dotnet\InputFormEF.Desktop\obj\Debug\net8.0-windows\InputFormEF.Desktop.csproj.CoreCompileInputs.cache
-D:\Project_Dotnet\InputFormEF.Desktop\obj\Debug\net8.0-windows\InputFormEF.Desktop.sourcelink.json
 D:\Project_Dotnet\InputFormEF.Desktop\bin\Debug\net8.0-windows\appsettings.json
 D:\Project_Dotnet\InputFormEF.Desktop\bin\Debug\net8.0-windows\InputFormEF.Desktop.exe
 D:\Project_Dotnet\InputFormEF.Desktop\bin\Debug\net8.0-windows\InputFormEF.Desktop.deps.json
@@ -161,9 +155,16 @@ D:\Project_Dotnet\InputFormEF.Desktop\bin\Debug\net8.0-windows\InputFormEF.BAL.d
 D:\Project_Dotnet\InputFormEF.Desktop\bin\Debug\net8.0-windows\InputFormEF.DAL.dll
 D:\Project_Dotnet\InputFormEF.Desktop\bin\Debug\net8.0-windows\InputFormEF.BAL.pdb
 D:\Project_Dotnet\InputFormEF.Desktop\bin\Debug\net8.0-windows\InputFormEF.DAL.pdb
+D:\Project_Dotnet\InputFormEF.Desktop\obj\Debug\net8.0-windows\InputFormEF.Desktop.csproj.AssemblyReference.cache
+D:\Project_Dotnet\InputFormEF.Desktop\obj\Debug\net8.0-windows\InputFormEF.Desktop.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project_Dotnet\InputFormEF.Desktop\obj\Debug\net8.0-windows\InputFormEF.Desktop.AssemblyInfoInputs.cache
+D:\Project_Dotnet\InputFormEF.Desktop\obj\Debug\net8.0-windows\InputFormEF.Desktop.AssemblyInfo.cs
+D:\Project_Dotnet\InputFormEF.Desktop\obj\Debug\net8.0-windows\InputFormEF.Desktop.csproj.CoreCompileInputs.cache
+D:\Project_Dotnet\InputFormEF.Desktop\obj\Debug\net8.0-windows\InputFormEF.Desktop.sourcelink.json
 D:\Project_Dotnet\InputFormEF.Desktop\obj\Debug\net8.0-windows\InputFor.E76C1670.Up2Date
 D:\Project_Dotnet\InputFormEF.Desktop\obj\Debug\net8.0-windows\InputFormEF.Desktop.dll
 D:\Project_Dotnet\InputFormEF.Desktop\obj\Debug\net8.0-windows\refint\InputFormEF.Desktop.dll
 D:\Project_Dotnet\InputFormEF.Desktop\obj\Debug\net8.0-windows\InputFormEF.Desktop.pdb
 D:\Project_Dotnet\InputFormEF.Desktop\obj\Debug\net8.0-windows\InputFormEF.Desktop.genruntimeconfig.cache
 D:\Project_Dotnet\InputFormEF.Desktop\obj\Debug\net8.0-windows\ref\InputFormEF.Desktop.dll
+D:\Project_Dotnet\InputFormEF.Desktop\bin\Debug\net8.0-windows\Dapper.dll

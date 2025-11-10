@@ -14,10 +14,10 @@ namespace InputFormEF.DAL
         public static void AddDAL(this IServiceCollection services, string connectionString)
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
-            // services.AddScoped<ILoginRepository, LoginRepository>();
-            // services.AddScoped<IDapperRepository>(x => new DapperRepository(connectionString));
-            //services.AddScoped<IStudentReadRepository, StudentRepository>();
-            // services.AddScoped<IStudentWriteRepository, StudentRepository>();
+            services.AddScoped<ILoginRepository, LoginRepository>();
+            services.AddScoped<IDapperRepository>(x => new DapperRepository(connectionString));
+            services.AddScoped<IStudentReadRepository, StudentRepository>();
+            services.AddScoped<IStudentWriteRepository, StudentRepository>();
         }
     }
 }

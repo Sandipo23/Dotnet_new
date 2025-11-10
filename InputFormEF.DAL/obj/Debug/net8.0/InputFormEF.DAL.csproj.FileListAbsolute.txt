@@ -1,13 +1,13 @@
+D:\Project_Dotnet\InputFormEF.DAL\bin\Debug\net8.0\InputFormEF.DAL.deps.json
+D:\Project_Dotnet\InputFormEF.DAL\bin\Debug\net8.0\InputFormEF.DAL.runtimeconfig.json
+D:\Project_Dotnet\InputFormEF.DAL\bin\Debug\net8.0\InputFormEF.DAL.dll
+D:\Project_Dotnet\InputFormEF.DAL\bin\Debug\net8.0\InputFormEF.DAL.pdb
 D:\Project_Dotnet\InputFormEF.DAL\obj\Debug\net8.0\InputFormEF.DAL.csproj.AssemblyReference.cache
 D:\Project_Dotnet\InputFormEF.DAL\obj\Debug\net8.0\InputFormEF.DAL.GeneratedMSBuildEditorConfig.editorconfig
 D:\Project_Dotnet\InputFormEF.DAL\obj\Debug\net8.0\InputFormEF.DAL.AssemblyInfoInputs.cache
 D:\Project_Dotnet\InputFormEF.DAL\obj\Debug\net8.0\InputFormEF.DAL.AssemblyInfo.cs
 D:\Project_Dotnet\InputFormEF.DAL\obj\Debug\net8.0\InputFormEF.DAL.csproj.CoreCompileInputs.cache
 D:\Project_Dotnet\InputFormEF.DAL\obj\Debug\net8.0\InputFormEF.DAL.sourcelink.json
-D:\Project_Dotnet\InputFormEF.DAL\bin\Debug\net8.0\InputFormEF.DAL.deps.json
-D:\Project_Dotnet\InputFormEF.DAL\bin\Debug\net8.0\InputFormEF.DAL.runtimeconfig.json
-D:\Project_Dotnet\InputFormEF.DAL\bin\Debug\net8.0\InputFormEF.DAL.dll
-D:\Project_Dotnet\InputFormEF.DAL\bin\Debug\net8.0\InputFormEF.DAL.pdb
 D:\Project_Dotnet\InputFormEF.DAL\obj\Debug\net8.0\InputFormEF.DAL.dll
 D:\Project_Dotnet\InputFormEF.DAL\obj\Debug\net8.0\refint\InputFormEF.DAL.dll
 D:\Project_Dotnet\InputFormEF.DAL\obj\Debug\net8.0\InputFormEF.DAL.pdb
