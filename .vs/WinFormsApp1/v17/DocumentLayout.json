@@ -1,0 +1,45 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Project_Dotnet\\WinFormsApp1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{16ED670B-6232-459B-8D3A-E3DD420BE816}|..\\InputFormEF.BAL\\InputFormEF.BAL.csproj|d:\\project_dotnet\\winformsapp1\\..\\inputformef.bal\\applicationconstant\\constants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16ED670B-6232-459B-8D3A-E3DD420BE816}|..\\InputFormEF.BAL\\InputFormEF.BAL.csproj|solutionrelative:..\\inputformef.bal\\applicationconstant\\constants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Constants.cs",
+              "DocumentMoniker": "D:\\Project_Dotnet\\InputFormEF.BAL\\ApplicationConstant\\Constants.cs",
+              "RelativeDocumentMoniker": "..\\InputFormEF.BAL\\ApplicationConstant\\Constants.cs",
+              "ToolTip": "D:\\Project_Dotnet\\InputFormEF.BAL\\ApplicationConstant\\Constants.cs*",
+              "RelativeToolTip": "..\\InputFormEF.BAL\\ApplicationConstant\\Constants.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-10T13:04:04.873Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
