@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InputFormEF.BAL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3481e77aff053e526901247ef030e15007c38220")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ea4c03dfa26977a4520898c43ac78eb283dd20fd")]
 [assembly: System.Reflection.AssemblyProductAttribute("InputFormEF.BAL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InputFormEF.BAL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
