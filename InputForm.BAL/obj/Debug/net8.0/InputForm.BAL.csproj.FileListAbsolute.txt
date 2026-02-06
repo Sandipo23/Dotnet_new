@@ -1,0 +1,6 @@
+D:\Project_Dotnet\InputForm.BAL\obj\Debug\net8.0\InputForm.BAL.csproj.AssemblyReference.cache
+D:\Project_Dotnet\InputForm.BAL\obj\Debug\net8.0\InputForm.BAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project_Dotnet\InputForm.BAL\obj\Debug\net8.0\InputForm.BAL.AssemblyInfoInputs.cache
+D:\Project_Dotnet\InputForm.BAL\obj\Debug\net8.0\InputForm.BAL.AssemblyInfo.cs
+D:\Project_Dotnet\InputForm.BAL\obj\Debug\net8.0\InputForm.BAL.csproj.CoreCompileInputs.cache
+D:\Project_Dotnet\InputForm.BAL\obj\Debug\net8.0\InputForm.BAL.sourcelink.json

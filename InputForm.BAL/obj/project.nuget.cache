@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "c5onS/VPWm0=",
-  "success": true,
+  "dgSpecHash": "Da7DJRB55kI=",
+  "success": false,
   "projectFilePath": "D:\\Project_Dotnet\\InputForm.BAL\\InputForm.BAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\acer\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
@@ -49,5 +49,17 @@
     "C:\\Users\\acer\\.nuget\\packages\\system.text.encodings.web\\9.0.8\\system.text.encodings.web.9.0.8.nupkg.sha512",
     "C:\\Users\\acer\\.nuget\\packages\\system.text.json\\9.0.8\\system.text.json.9.0.8.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1108",
+      "level": "Error",
+      "message": "Cycle detected. \r\n  InputForm.BAL -> InputForm.BAL.",
+      "projectPath": "D:\\Project_Dotnet\\InputForm.BAL\\InputForm.BAL.csproj",
+      "filePath": "D:\\Project_Dotnet\\InputForm.BAL\\InputForm.BAL.csproj",
+      "libraryId": "InputForm.BAL",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+	  <ProjectReference Include="..\InputForm.BAL\InputForm.BAL.csproj" />
     <ProjectReference Include="..\InputForm.DAL\InputForm.DAL.csproj" />
   </ItemGroup>
 
