@@ -2176,7 +2176,6 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "InputForm.BAL >= 1.0.0",
       "InputForm.DAL >= 1.0.0"
     ]
   },
@@ -2212,9 +2211,6 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\Project_Dotnet\\InputForm.BAL\\InputForm.BAL.csproj": {
-              "projectPath": "D:\\Project_Dotnet\\InputForm.BAL\\InputForm.BAL.csproj"
-            },
             "D:\\Project_Dotnet\\InputForm.DAL\\InputForm.DAL.csproj": {
               "projectPath": "D:\\Project_Dotnet\\InputForm.DAL\\InputForm.DAL.csproj"
             }
@@ -2255,16 +2251,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.310/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1108",
-      "level": "Error",
-      "message": "Cycle detected. \r\n  InputForm.BAL -> InputForm.BAL.",
-      "libraryId": "InputForm.BAL",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  }
 }

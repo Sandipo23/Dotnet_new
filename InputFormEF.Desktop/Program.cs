@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.SqlServer.Server;
 using Microsoft.Extensions.DependencyInjection;
+using WinFormsApp1;
 
 //using InputFormEF.DAL;
 
@@ -16,12 +17,14 @@ namespace InputFormEF.Desktop
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        private static void Main()
+        private static void Main(string[] args)
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+            var host = CreateHostBuilder(args).Build();
+            ServiceProvider = host.Services;
+
             ApplicationConfiguration.Initialize();
-            Application.Run();
+            var loginForm = ServiceProvider.GetService<LoginForm>();
+            Application.Run(loginForm);
         }
 
         public static IServiceProvider ServiceProvider { get; private set; }

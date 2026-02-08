@@ -4,3 +4,13 @@ D:\Project_Dotnet\InputForm.BAL\obj\Debug\net8.0\InputForm.BAL.AssemblyInfoInput
 D:\Project_Dotnet\InputForm.BAL\obj\Debug\net8.0\InputForm.BAL.AssemblyInfo.cs
 D:\Project_Dotnet\InputForm.BAL\obj\Debug\net8.0\InputForm.BAL.csproj.CoreCompileInputs.cache
 D:\Project_Dotnet\InputForm.BAL\obj\Debug\net8.0\InputForm.BAL.sourcelink.json
+D:\Project_Dotnet\InputForm.BAL\bin\Debug\net8.0\InputForm.BAL.deps.json
+D:\Project_Dotnet\InputForm.BAL\bin\Debug\net8.0\InputForm.BAL.dll
+D:\Project_Dotnet\InputForm.BAL\bin\Debug\net8.0\InputForm.BAL.pdb
+D:\Project_Dotnet\InputForm.BAL\bin\Debug\net8.0\InputForm.DAL.dll
+D:\Project_Dotnet\InputForm.BAL\bin\Debug\net8.0\InputForm.DAL.pdb
+D:\Project_Dotnet\InputForm.BAL\obj\Debug\net8.0\InputFor.94288262.Up2Date
+D:\Project_Dotnet\InputForm.BAL\obj\Debug\net8.0\InputForm.BAL.dll
+D:\Project_Dotnet\InputForm.BAL\obj\Debug\net8.0\refint\InputForm.BAL.dll
+D:\Project_Dotnet\InputForm.BAL\obj\Debug\net8.0\InputForm.BAL.pdb
+D:\Project_Dotnet\InputForm.BAL\obj\Debug\net8.0\ref\InputForm.BAL.dll

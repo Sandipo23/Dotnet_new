@@ -20,6 +20,20 @@ namespace InputFormEF.DAL.Configurations
             builder
             .Property(x => x.Password)
             .HasMaxLength(50);
+
+            builder.HasData(GetUsers());
+        }
+
+        private List<User> GetUsers()
+        {
+            var users = new List<User>
+            {
+                new User
+                {
+                    Id = 1, UserName= "sandip", Password= "bhandari"
+                }
+            };
+            return users;
         }
     }
 }

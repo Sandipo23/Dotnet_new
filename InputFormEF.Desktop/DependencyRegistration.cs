@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WinFormsApp1;
 
 namespace InputFormEF.Desktop
 {
@@ -11,8 +12,8 @@ namespace InputFormEF.Desktop
     {
         public static void AddDestopLayer(this IServiceCollection services)
         {
-            //  services.AddScoped<LoginForm>();
-            //  services.AddScoped<StudentForm>();
+            services.AddScoped<LoginForm>();
+            services.AddScoped<StudentForm>();
         }
     }
 }

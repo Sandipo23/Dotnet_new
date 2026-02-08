@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using InputFormEF.BAL.Interfaces;
+using InputFormEF.BAL.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +13,9 @@ namespace InputFormEF.BAL
     {
         public static void AddBAL(this IServiceCollection services)
         {
-            //  services.AddScoped<ILoginService, LoginService>();
-            //  services.AddScoped<IStudentReadService, StudentService>();
-            //  services.AddScoped<IStudentWriteService, StudentService>();
+            services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IStudentReadService, StudentService>();
+            services.AddScoped<IStudentWriteService, StudentService>();
         }
     }
 }
