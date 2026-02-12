@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InputFormEF.DAL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a9e6558f5839ef9e582e5177502530a3a644f5b9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2edbdd1774d5e0194381dac455e7d6927ce1b6a0")]
 [assembly: System.Reflection.AssemblyProductAttribute("InputFormEF.DAL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InputFormEF.DAL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

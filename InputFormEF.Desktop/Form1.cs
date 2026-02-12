@@ -276,13 +276,13 @@ namespace WinFormsApp1
             //string[] hobbies = lbHobbies.SelectedItems.Cast<string>().ToArray();  this is for listbox
             //string[] hobbies = lbHobbies.CheckedItems.Cast<string>().ToArray();  // this is for checked list box - gives the data that user clicked
 
-            var hobbies = lbHobbies
+            var hobbyIds = lbHobbies
                          .CheckedItems
                          .Cast<Hobby>()
                           .Select(x => x.Id)
                          .ToList();
 
-            string hobbyIds = String.Join(",", hobbies);
+            //  string hobbyIds = String.Join(",", hobbies);
             if (String.IsNullOrEmpty(firstName))
             {
                 lblFirstNameError.Visible = true;
@@ -327,7 +327,7 @@ namespace WinFormsApp1
                 lblDOBError.Visible = false;
             }
 
-            if (hobbies.Count <= 0)
+            if (hobbyIds.Count <= 0)
             {
                 lblHobbiesError.Visible = true;
             }
@@ -337,7 +337,7 @@ namespace WinFormsApp1
             }
             //string imagePath = Path.Combine(_studentService._folderLocation, txtImage.Text);  // to store and retreive the image path
             string imagePath = String.IsNullOrEmpty(txtImage.Text) ? null : Path.Combine(_studentReadService.FilePath, txtImage.Text);
-            if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName) && cmbCourse.SelectedIndex > 0 && agree && !String.IsNullOrEmpty(dob) && hobbies.Count > 0)
+            if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName) && cmbCourse.SelectedIndex > 0 && agree && !String.IsNullOrEmpty(dob) && hobbyIds.Count > 0)
             {
                 //StudentService studentService = new StudentService();
                 Student student = new Student     //just property ma save garna lai object banako

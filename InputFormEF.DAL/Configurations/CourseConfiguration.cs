@@ -15,7 +15,43 @@ namespace InputFormEF.DAL.Configurations
         {
             builder
             .Property(x => x.Name)
-            .HasMaxLength(100);
+           .HasMaxLength(100);
+
+            builder
+              .HasData(GetCourses());
+        }
+
+        private List<Course> GetCourses()
+        {
+            var courses = new List<Course>
+            {
+                 new Course
+                 {
+                      Id = 1,
+                      Name = "BCA"
+                 },
+                 new Course
+                 {
+                      Id = 2,
+                      Name = "BIT"
+                 },
+                 new Course
+                 {
+                      Id = 3,
+                      Name = "BIM"
+                 },
+                 new Course
+                 {
+                      Id = 4,
+                      Name = "BBA"
+                 },
+                 new Course
+                 {
+                      Id = 5,
+                      Name = "BBS"
+                 }
+            };
+            return courses;
         }
     }
 }

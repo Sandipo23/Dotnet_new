@@ -1,4 +1,5 @@
 ﻿using InputFormEF.DAL.Data;
+using InputFormEF.DAL.Dto;
 using InputFormEF.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
@@ -8,12 +9,11 @@ namespace InputFormEF.DAL
     public class StudentRepository : IStudentReadRepository, IStudentWriteRepository
     {
         private readonly ApplicationDbContext _context;
-        private readonly IDapperRepository _dapper;
+        //  private readonly IDapperRepository _dapper;
 
-        public StudentRepository(ApplicationDbContext context, IDapperRepository dapper)
+        public StudentRepository(ApplicationDbContext context)
         {
             _context = context;
-            _dapper = dapper;
         }
 
         public async Task<List<Course>> GetAllCoursesAsync()
@@ -34,8 +34,10 @@ namespace InputFormEF.DAL
 
         public async Task<List<Student>> GetAllAsync()
         {
-            string sp = "usp_GetAllStudents";
-            var students = await _dapper.QueryAsync<Student>(sp, commandType: CommandType.StoredProcedure);
+            var students = await _context
+                                 .Students
+                                 .Include(x => x.Course)
+                                 .ToListAsync();
             return students;
         }
 

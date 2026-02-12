@@ -16,6 +16,42 @@ namespace InputFormEF.DAL.Configurations
             builder
             .Property(x => x.Name)
             .HasMaxLength(100);
+
+            builder
+            .HasData(GetHobbies());
+        }
+
+        private List<Hobby> GetHobbies()
+        {
+            var hobbies = new List<Hobby>
+            {
+                new Hobby
+                {
+                    Id = 1,
+                    Name = "Music"
+                },
+                new Hobby
+                {
+                    Id = 2,
+                    Name = "Dance"
+                },
+                new Hobby
+                {
+                    Id = 3,
+                    Name = "Programming"
+                },
+                new Hobby
+                {
+                    Id = 4,
+                    Name = "Hiking"
+                },
+                new Hobby
+                {
+                    Id = 5,
+                    Name = "Swimming"
+                }
+            };
+            return hobbies;
         }
     }
 }
