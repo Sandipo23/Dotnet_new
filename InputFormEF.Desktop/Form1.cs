@@ -10,6 +10,8 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.Threading.Tasks;
+
 namespace WinFormsApp1
 {
     public partial class StudentForm : Form
@@ -19,6 +21,7 @@ namespace WinFormsApp1
 
         private readonly IStudentWriteService _studentWriteService;
         private string _uploadedFile;
+        private int _studentId = 0;
         private string _userName;
         private List<StudentReadDto> _students = new List<StudentReadDto>();
 
@@ -254,7 +257,7 @@ namespace WinFormsApp1
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            await SaveAsync();
+            await SaveUpdateAsync();
             // ResetControls();
         }
 
@@ -263,7 +266,7 @@ namespace WinFormsApp1
             ResetControls();
         }
 
-        private async Task SaveAsync()
+        private async Task SaveUpdateAsync()
         {
             string firstName = txtFirstName.Text.Trim();
             string lastName = txtLastName.Text.Trim();
@@ -356,7 +359,15 @@ namespace WinFormsApp1
                                      })
                                      .ToList(),
                 };
-                await _studentWriteService.SaveAsync(student);  // student ko info save gareko so that json ma save garauma
+                if (_studentId > 0)
+                {
+                    student.Id = _studentId;
+                    await _studentWriteService.UpdateAsync(student);
+                }
+                else
+                {
+                    await _studentWriteService.SaveAsync(student);
+                }  // student ko info save gareko so that json ma save garauma
                 if (!String.IsNullOrEmpty(_uploadedFile) && !String.IsNullOrEmpty(txtImage.Text))
                 {
                     _studentWriteService.SaveImage(_uploadedFile, imagePath);
@@ -369,6 +380,7 @@ namespace WinFormsApp1
 
         private void ResetControls()
         {
+            btnSave.Enabled = true;
             txtFirstName.Clear();
             txtLastName.Clear();
 
@@ -378,12 +390,19 @@ namespace WinFormsApp1
             RemoveImage();
             _uploadedFile = "";
             dtpDOB.CustomFormat = " ";
+
             // lbHobbies.SelectedItems.Clear();
+            _studentId = 0;
+            ResetHobbies();
+            txtFirstName.Focus();
+        }
+
+        private void ResetHobbies()
+        {
             for (int i = 0; i < lbHobbies.Items.Count; i++)
             {
                 lbHobbies.SetItemChecked(i, false);
             }
-            txtFirstName.Focus();
         }
 
         //private void cmbCourse_SelectedIndexChanged(object sender, EventArgs e)
@@ -480,6 +499,85 @@ namespace WinFormsApp1
 
             await LoadHobbiesAsync();
             await LoadStudentsGridAsync();
+        }
+
+        private async void btnUpdate_Click(object sender, EventArgs e)
+        {
+            btnSave.Enabled = true;
+            if (_studentId > 0)
+            {
+                // Update
+                await SaveUpdateAsync();
+            }
+            else
+            {
+                MessageBox.Show("Please select a student to update.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ResetControls();
+            }
+        }
+
+        private async void btnDelete_ClickAsync(object sender, EventArgs e)
+        {
+            btnSave.Enabled = true;
+            if (_studentId > 0)
+            {
+                // Delete
+                await _studentWriteService.DeleteAsync(_studentId);
+                await LoadStudentsAsync();
+                MessageBox.Show("Deleted Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Please select a student to delete.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            ResetControls();
+        }
+
+        private async void dgvStudents_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnSave.Enabled = false;
+            // button1.Enabled = false;
+            button2.Enabled = false;
+            _studentId = (int)dgvStudents.CurrentRow.Cells[nameof(StudentReadDto.Id)].Value;
+            if (_studentId > 0)
+            {
+                btnSave.Enabled = false;
+                //  button1.Enabled = false;
+                button2.Enabled = false;
+                var student = await _studentReadService.GetByIdAsync(_studentId);
+                if (student != null)
+                {
+                    btnSave.Enabled = false;
+                    button1.Enabled = false;
+                    button2.Enabled = false;
+                    txtFirstName.Text = student.FirstName;
+                    txtLastName.Text = student.LastName;
+                    if (student.Gender)
+                    {
+                        rbMale.Checked = true;
+                    }
+                    else
+                    {
+                        rbFemale.Checked = true;
+                    }
+
+                    cmbCourse.Text = student.Course.Name;
+                    dtpDOB.CustomFormat = Constants.Format;
+                    dtpDOB.Value = student.DOB;
+                    ResetHobbies();
+                    for (int i = 0; i < student.StudentHobbies.Count; i++)
+                    {
+                        int hobbyId = student.StudentHobbies[i].HobbyId;
+                        var hobby = lbHobbies
+                                   .Items
+                                   .Cast<Hobby>()
+                                   .FirstOrDefault(x => x.Id == hobbyId);
+                        int index = lbHobbies.Items.IndexOf(hobby);
+                        lbHobbies.SetItemChecked(index, true);
+                    }
+                    chkAgree.Checked = student.Agree;
+                }
+            }
         }
     }
 }

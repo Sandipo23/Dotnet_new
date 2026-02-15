@@ -11,5 +11,9 @@ namespace InputFormEF.DAL
     public interface IStudentWriteRepository
     {
         Task SaveAsync(Student student);
+
+        Task UpdateAsync(Student student);
+
+        Task DeleteAsync(int studentId);
     }
 }

@@ -18,6 +18,6 @@ namespace InputFormEF.DAL.Entities
         public string Profile { get; set; }
         public DateTime CreatedDate { get; set; }
         public Course Course { get; set; }
-        public ICollection<StudentHobby> StudentHobbies { get; set; }
+        public List<StudentHobby> StudentHobbies { get; set; }
     }
 }

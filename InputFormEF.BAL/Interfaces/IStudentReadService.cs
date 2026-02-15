@@ -18,5 +18,7 @@ namespace InputFormEF.BAL.Interfaces
         Task<List<Hobby>> GetAllHobbiesAsync();
 
         Task<List<StudentReadDto>> GetAllAsync();
+
+        Task<Student> GetByIdAsync(int id);
     }
 }

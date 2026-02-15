@@ -16,5 +16,7 @@ namespace InputFormEF.DAL
         Task<List<Hobby>> GetAllHobbiesAsync();
 
         Task<List<Student>> GetAllAsync();
+
+        Task<Student> GetByIdAsync(int id);
     }
 }

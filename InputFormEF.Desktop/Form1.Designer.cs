@@ -44,7 +44,6 @@
             lblLastName = new Label();
             lblFirstNameError = new Label();
             label5 = new Label();
-            btnCancel = new Button();
             lblCourseError = new Label();
             chkAgree = new CheckBox();
             pbStudent = new PictureBox();
@@ -66,6 +65,10 @@
             lblUserName = new Label();
             txtSearch = new TextBox();
             lblSearch = new Label();
+            button1 = new Button();
+            button2 = new Button();
+            btnDelete = new Button();
+            btnUpdate = new Button();
             ((System.ComponentModel.ISupportInitialize)pbStudent).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvStudents).BeginInit();
             menuStrip.SuspendLayout();
@@ -236,16 +239,6 @@
             label5.TabIndex = 1005;
             label5.Text = "First Name";
             // 
-            // btnCancel
-            // 
-            btnCancel.Location = new Point(281, 492);
-            btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(109, 39);
-            btnCancel.TabIndex = 1023;
-            btnCancel.Text = "Cancel";
-            btnCancel.UseVisualStyleBackColor = true;
-            btnCancel.Click += btnCancel_Click;
-            // 
             // lblCourseError
             // 
             lblCourseError.AutoSize = true;
@@ -272,7 +265,7 @@
             // 
             // pbStudent
             // 
-            pbStudent.Location = new Point(619, 68);
+            pbStudent.Location = new Point(702, 68);
             pbStudent.Name = "pbStudent";
             pbStudent.Size = new Size(143, 124);
             pbStudent.TabIndex = 1025;
@@ -280,7 +273,7 @@
             // 
             // btnUpload
             // 
-            btnUpload.Location = new Point(595, 242);
+            btnUpload.Location = new Point(678, 242);
             btnUpload.Name = "btnUpload";
             btnUpload.Size = new Size(88, 27);
             btnUpload.TabIndex = 1026;
@@ -290,7 +283,7 @@
             // 
             // btnRemove
             // 
-            btnRemove.Location = new Point(689, 242);
+            btnRemove.Location = new Point(772, 242);
             btnRemove.Name = "btnRemove";
             btnRemove.Size = new Size(82, 27);
             btnRemove.TabIndex = 1027;
@@ -300,7 +293,7 @@
             // 
             // txtImage
             // 
-            txtImage.Location = new Point(604, 207);
+            txtImage.Location = new Point(687, 207);
             txtImage.Name = "txtImage";
             txtImage.Size = new Size(167, 23);
             txtImage.TabIndex = 1028;
@@ -314,11 +307,12 @@
             dgvStudents.AllowUserToAddRows = false;
             dgvStudents.AllowUserToDeleteRows = false;
             dgvStudents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvStudents.Location = new Point(39, 552);
+            dgvStudents.Location = new Point(39, 574);
             dgvStudents.Name = "dgvStudents";
             dgvStudents.ReadOnly = true;
-            dgvStudents.Size = new Size(723, 238);
+            dgvStudents.Size = new Size(829, 238);
             dgvStudents.TabIndex = 1029;
+            dgvStudents.CellDoubleClick += dgvStudents_CellDoubleClick;
             // 
             // lblDOBError
             // 
@@ -401,7 +395,7 @@
             menuStrip.Items.AddRange(new ToolStripItem[] { settingsToolStripMenuItem });
             menuStrip.Location = new Point(0, 0);
             menuStrip.Name = "menuStrip";
-            menuStrip.Size = new Size(800, 24);
+            menuStrip.Size = new Size(880, 24);
             menuStrip.TabIndex = 1032;
             menuStrip.Text = "menuStrip1";
             // 
@@ -429,7 +423,7 @@
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(650, 523);
+            txtSearch.Location = new Point(742, 545);
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(112, 23);
             txtSearch.TabIndex = 1034;
@@ -439,17 +433,59 @@
             // 
             lblSearch.AutoSize = true;
             lblSearch.Font = new Font("Segoe UI", 12F);
-            lblSearch.Location = new Point(592, 523);
+            lblSearch.Location = new Point(676, 547);
             lblSearch.Name = "lblSearch";
             lblSearch.Size = new Size(60, 21);
             lblSearch.TabIndex = 1035;
             lblSearch.Text = "Search:";
             // 
+            // button1
+            // 
+            button1.Location = new Point(506, 492);
+            button1.Name = "button1";
+            button1.Size = new Size(109, 39);
+            button1.TabIndex = 1023;
+            button1.Text = "Cancel";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += btnCancel_Click;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(136, 492);
+            button2.Name = "button2";
+            button2.Size = new Size(126, 39);
+            button2.TabIndex = 1015;
+            button2.Text = "Save";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += btnSave_Click;
+            // 
+            // btnDelete
+            // 
+            btnDelete.Location = new Point(391, 492);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(109, 39);
+            btnDelete.TabIndex = 1036;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_ClickAsync;
+            // 
+            // btnUpdate
+            // 
+            btnUpdate.Location = new Point(276, 492);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(109, 39);
+            btnUpdate.TabIndex = 1037;
+            btnUpdate.Text = "Update";
+            btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += btnUpdate_Click;
+            // 
             // StudentForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 802);
+            ClientSize = new Size(880, 802);
+            Controls.Add(btnUpdate);
+            Controls.Add(btnDelete);
             Controls.Add(lblSearch);
             Controls.Add(txtSearch);
             Controls.Add(lblUserName);
@@ -461,9 +497,10 @@
             Controls.Add(btnUpload);
             Controls.Add(pbStudent);
             Controls.Add(chkAgree);
-            Controls.Add(btnCancel);
+            Controls.Add(button1);
             Controls.Add(cmbCourse);
             Controls.Add(rbFemale);
+            Controls.Add(button2);
             Controls.Add(rbMale);
             Controls.Add(btnSave);
             Controls.Add(txtFee);
@@ -516,7 +553,6 @@
         private Label lblLastName;
         private Label lblFirstNameError;
         private Label label5;
-        private Button btnCancel;
         private Label lblCourseError;
         private CheckBox chkAgree;
         private PictureBox pbStudent;
@@ -538,5 +574,9 @@
         private ToolStripMenuItem menuLogout;
         private TextBox txtSearch;
         private Label lblSearch;
+        private Button button1;
+        private Button button2;
+        private Button btnDelete;
+        private Button btnUpdate;
     }
 }

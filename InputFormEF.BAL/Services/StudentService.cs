@@ -66,6 +66,22 @@ namespace InputFormEF.BAL.Services
             File.Copy(source, destination, true);
         }
 
+        public async Task UpdateAsync(Student student)
+        {
+            await _studentWriteRepository.UpdateAsync(student);
+        }
+
+        public async Task DeleteAsync(int studentId)
+        {
+            await _studentWriteRepository.DeleteAsync(studentId);
+        }
+
         #endregion Write
+
+        public async Task<Student> GetByIdAsync(int id)
+        {
+            var student = await _studentReadRepository.GetByIdAsync(id);
+            return student;
+        }
     }
 }
