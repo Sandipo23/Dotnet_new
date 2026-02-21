@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InputFormEF.DAL.Dto
+namespace InputFormEF.BAL.Dto
 {
     public class StudentReadDto
     {

@@ -1,8 +1,13 @@
-﻿using InputFormEF.BAL.Interfaces;
-using InputFormEF.DAL.Entities;
-using InputFormEF.DAL.Dto;
-using Microsoft.Extensions.Configuration;
+﻿using Azure;
+using FluentValidation;
+using InputFormEF.BAL.Dto;
+using InputFormEF.BAL.Interfaces;
 using InputFormEF.DAL;
+
+using InputFormEF.DAL.Entities;
+using Microsoft.Extensions.Configuration;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 
 namespace InputFormEF.BAL.Services
 {
@@ -12,14 +17,18 @@ namespace InputFormEF.BAL.Services
         private readonly IStudentReadRepository _studentReadRepository;
         private readonly IStudentWriteRepository _studentWriteRepository;
         private readonly IConfiguration _configuration;
+        private readonly IValidator<StudentCreateDto> _studentCreateValidator;
 
-        public StudentService(IStudentReadRepository studentReadRepository, IStudentWriteRepository studentWriteRepository, IConfiguration configuration)
+        public StudentService(IStudentReadRepository studentReadRepository, IStudentWriteRepository studentWriteRepository,
+            IConfiguration configuration, IValidator<StudentCreateDto> studentCreateValidator)
         {
             // _folderLocation = ConfigurationManager.AppSettings["FolderLocation"];
             _configuration = configuration;
 
             _studentReadRepository = studentReadRepository;
             _studentWriteRepository = studentWriteRepository;
+            _studentCreateValidator = studentCreateValidator;
+
             path = Path.Combine(FilePath, "student.json");
         }
 
@@ -56,10 +65,44 @@ namespace InputFormEF.BAL.Services
 
         #region Write
 
-        public async Task SaveAsync(Student student)
+        public async Task<OutputDto> SaveAsync(StudentCreateDto request)
         {
-            await _studentWriteRepository.SaveAsync(student);
+            try
+            {
+                var validationResult = await _studentCreateValidator.ValidateAsync(request);
+                if (!validationResult.IsValid)
+                    return OutputDtoConverter.SetFailed(validationResult);
+
+                var student = new Student
+                {
+                    FirstName = request.FirstName,
+                    LastName = request.LastName,
+                    Gender = request.Gender,
+                    Agree = request.Agree,
+                    CourseId = request.CourseId,
+                    DOB = request.DOB.Value,
+                    Profile = request.Profile,
+                    StudentHobbies = request
+                                     .HobbyIds
+                                     .Select(x => new StudentHobby
+                                     {
+                                         HobbyId = x
+                                     })
+                                     .ToList(),
+                };
+                await _studentWriteRepository.SaveAsync(student);
+                return OutputDtoConverter.SetSuccess(_module, Operation.Save);
+            }
+            catch (Exception ex)
+            {
+                return OutputDtoConverter.SetFailed(ex.Message);
+            }
         }
+
+        // public async Task SaveAsync(Student student)
+        // {
+        //     await _studentWriteRepository.SaveAsync(student);
+        //  }
 
         public void SaveImage(string source, string destination)
         {

@@ -1,4 +1,6 @@
-﻿using InputFormEF.DAL.Entities;
+﻿using InputFormEF.BAL.Dto;
+
+using InputFormEF.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,7 @@ namespace InputFormEF.BAL.Interfaces
 {
     public interface IStudentWriteService
     {
-        Task SaveAsync(Student student);
+        Task<OutputDto> SaveAsync(StudentCreateDto request);
 
         void SaveImage(string source, string destination);
 

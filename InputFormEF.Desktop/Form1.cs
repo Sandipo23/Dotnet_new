@@ -12,6 +12,10 @@ using System.Windows.Forms;
 
 using System.Threading.Tasks;
 
+using InputFormEF.BAL.Dto;
+using InputFormEF.BAL.Enums;
+using InputFormEF.Desktop.Utilities;
+
 namespace WinFormsApp1
 {
     public partial class StudentForm : Form
@@ -286,96 +290,53 @@ namespace WinFormsApp1
                          .ToList();
 
             //  string hobbyIds = String.Join(",", hobbies);
-            if (String.IsNullOrEmpty(firstName))
-            {
-                lblFirstNameError.Visible = true;
-            }
-            else
-            {
-                lblFirstNameError.Visible = false;
-            }
 
-            if (String.IsNullOrEmpty(lastName))
-            {
-                lblLastNameError.Visible = true;
-            }
-            else
-            {
-                lblLastNameError.Visible = false;
-            }
-
-            if (cmbCourse.SelectedIndex == 0)
-            {
-                lblCourseError.Visible = true;
-            }
-            else
-            {
-                lblCourseError.Visible = false;
-            }
-            if (!agree)
-            {
-                lblAgreeError.Visible = true;
-            }
-            else
-            {
-                lblAgreeError.Visible = false;
-            }
-
-            if (String.IsNullOrEmpty(dob))
-            {
-                lblDOBError.Visible = true;
-            }
-            else
-            {
-                lblDOBError.Visible = false;
-            }
-
-            if (hobbyIds.Count <= 0)
-            {
-                lblHobbiesError.Visible = true;
-            }
-            else
-            {
-                lblHobbiesError.Visible = false;
-            }
             //string imagePath = Path.Combine(_studentService._folderLocation, txtImage.Text);  // to store and retreive the image path
             string imagePath = String.IsNullOrEmpty(txtImage.Text) ? null : Path.Combine(_studentReadService.FilePath, txtImage.Text);
-            if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName) && cmbCourse.SelectedIndex > 0 && agree && !String.IsNullOrEmpty(dob) && hobbyIds.Count > 0)
             {
                 //StudentService studentService = new StudentService();
-                Student student = new Student     //just property ma save garna lai object banako
+                var student = new StudentCreateDto     //just property ma save garna lai object banako
                 {
                     FirstName = firstName,
                     LastName = lastName,
                     Gender = gender,
                     Agree = agree,
                     CourseId = courseId,
-                    DOB = dtpDOB.Value,
+                    DOB = String.IsNullOrEmpty(dob) ? null : dtpDOB.Value,
                     Profile = imagePath,
-                    StudentHobbies = hobbyIds
-                                     .Select(x => new StudentHobby
-                                     {
-                                         HobbyId = x
-                                     })
-                                     .ToList(),
+                    HobbyIds = hobbyIds
                 };
                 if (_studentId > 0)
                 {
-                    student.Id = _studentId;
-                    await _studentWriteService.UpdateAsync(student);
+                    // student.Id = _studentId;
+                    //await _studentWriteService.UpdateAsync(student);
                 }
                 else
                 {
-                    await _studentWriteService.SaveAsync(student);
-                }  // student ko info save gareko so that json ma save garauma
-                if (!String.IsNullOrEmpty(_uploadedFile) && !String.IsNullOrEmpty(txtImage.Text))
-                {
-                    _studentWriteService.SaveImage(_uploadedFile, imagePath);
+                    var result = await _studentWriteService.SaveAsync(student);
+                    if (result.Status == Status.Success)
+                    {
+                        await OnSuccessAsync(imagePath);
+                    }
+                    else
+                    {
+                        DialogBox.FailureAlert(result);
+                        txtFirstName.Focus();
+                    }
                 }
-                await LoadStudentsAsync();
-                MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ResetControls();
             }
+        }  // student ko info save gareko so that json ma save garauma
+
+        private async Task OnSuccessAsync(string imagePath)
+        {
+            if (!String.IsNullOrEmpty(_uploadedFile) && !String.IsNullOrEmpty(txtImage.Text))
+            {
+                _studentWriteService.SaveImage(_uploadedFile, imagePath);
+            }
+
+            await LoadStudentsAsync();
+            DialogBox.SuccessAlert("Saved Successfully", "Success");
+            ResetControls();
         }
 
         private void ResetControls()

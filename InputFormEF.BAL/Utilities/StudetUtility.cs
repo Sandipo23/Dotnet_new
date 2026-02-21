@@ -1,4 +1,4 @@
-﻿using InputFormEF.DAL.Dto;
+﻿using InputFormEF.BAL.Dto;
 using InputFormEF.DAL.Entities;
 
 namespace InputFormEF.BAL

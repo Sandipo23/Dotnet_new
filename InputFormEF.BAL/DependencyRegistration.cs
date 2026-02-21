@@ -1,5 +1,7 @@
-﻿using InputFormEF.BAL.Interfaces;
+﻿using FluentValidation;
+using InputFormEF.BAL.Interfaces;
 using InputFormEF.BAL.Services;
+using InputFormEF.BAL.Validator;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,7 @@ namespace InputFormEF.BAL
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IStudentReadService, StudentService>();
             services.AddScoped<IStudentWriteService, StudentService>();
+            services.AddValidatorsFromAssemblyContaining<StudentCreateDtoValidator>();
         }
     }
 }
