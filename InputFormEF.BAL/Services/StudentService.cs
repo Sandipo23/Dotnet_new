@@ -1,6 +1,8 @@
 ﻿using Azure;
 using FluentValidation;
+using InputFormEF.BAL.ApplicationConstant;
 using InputFormEF.BAL.Dto;
+using InputFormEF.BAL.Enums;
 using InputFormEF.BAL.Interfaces;
 using InputFormEF.DAL;
 
@@ -18,9 +20,10 @@ namespace InputFormEF.BAL.Services
         private readonly IStudentWriteRepository _studentWriteRepository;
         private readonly IConfiguration _configuration;
         private readonly IValidator<StudentCreateDto> _studentCreateValidator;
+        private readonly IValidator<StudentUpdateDto> _studentUpdateValidator;
 
         public StudentService(IStudentReadRepository studentReadRepository, IStudentWriteRepository studentWriteRepository,
-            IConfiguration configuration, IValidator<StudentCreateDto> studentCreateValidator)
+            IConfiguration configuration, IValidator<StudentCreateDto> studentCreateValidator, IValidator<StudentUpdateDto> studentUpdateValidator)
         {
             // _folderLocation = ConfigurationManager.AppSettings["FolderLocation"];
             _configuration = configuration;
@@ -28,6 +31,7 @@ namespace InputFormEF.BAL.Services
             _studentReadRepository = studentReadRepository;
             _studentWriteRepository = studentWriteRepository;
             _studentCreateValidator = studentCreateValidator;
+            _studentUpdateValidator = studentUpdateValidator;
 
             path = Path.Combine(FilePath, "student.json");
         }
@@ -109,9 +113,55 @@ namespace InputFormEF.BAL.Services
             File.Copy(source, destination, true);
         }
 
-        public async Task UpdateAsync(Student student)
+        public async Task<OutputDto> UpdateAsync(StudentUpdateDto request)
         {
-            await _studentWriteRepository.UpdateAsync(student);
+            try
+            {
+                var validationResult = await _studentUpdateValidator.ValidateAsync(request);
+                if (!validationResult.IsValid)
+                {
+                    return new OutputDto
+                    {
+                        Status = Status.Failed,
+                        Message = Message.Failed,
+                        ValidationResult = validationResult
+                    };
+                }
+
+                var student = new Student
+                {
+                    Id = request.Id,
+                    FirstName = request.FirstName,
+                    LastName = request.LastName,
+                    Gender = request.Gender,
+                    Agree = request.Agree,
+                    CourseId = request.CourseId,
+                    DOB = request.DOB.Value,
+                    Profile = request.Profile,
+                    StudentHobbies = request
+                                     .HobbyIds
+                                     .Select(x => new StudentHobby
+                                     {
+                                         HobbyId = x
+                                     })
+                                     .ToList(),
+                };
+                await _studentWriteRepository.UpdateAsync(student);
+                return new OutputDto
+                {
+                    Status = Status.Success,
+                    Message = "Updated Successfully",
+                };
+            }
+            catch (Exception ex)
+            {
+                return new OutputDto
+                {
+                    Status = Status.Failed,
+                    Message = Message.Failed,
+                    Error = ex.Message
+                };
+            }
         }
 
         public async Task DeleteAsync(int studentId)

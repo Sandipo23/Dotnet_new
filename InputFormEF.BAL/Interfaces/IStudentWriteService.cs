@@ -15,7 +15,7 @@ namespace InputFormEF.BAL.Interfaces
 
         void SaveImage(string source, string destination);
 
-        Task UpdateAsync(Student student);
+        Task<OutputDto> UpdateAsync(StudentUpdateDto request);
 
         Task DeleteAsync(int studentId);
     }

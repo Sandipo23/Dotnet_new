@@ -4,18 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Message = InputFormEF.BAL.ApplicationConstant.Message;
 
 namespace InputFormEF.Desktop.Utilities
 {
     public static class DialogBox
 
     {
-        public static void SuccessAlert(string message, string caption)
+        public static void SuccessAlert(string message, string caption = Message.Success)
         {
             MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        public static void FailureAlert(string error, string caption)
+        public static void FailureAlert(string error, string caption = Message.Failed)
         {
             MessageBox.Show(error, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }

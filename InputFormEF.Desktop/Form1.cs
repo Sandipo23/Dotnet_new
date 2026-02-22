@@ -2,7 +2,7 @@ using InputFormEF.BAL;
 using InputFormEF.BAL.AppliationConstant;
 using InputFormEF.BAL.Interfaces;
 using InputFormEF.DAL;
-using InputFormEF.DAL.Dto;
+
 using InputFormEF.DAL.Entities;
 using System;
 using System.Data;
@@ -293,6 +293,19 @@ namespace WinFormsApp1
 
             //string imagePath = Path.Combine(_studentService._folderLocation, txtImage.Text);  // to store and retreive the image path
             string imagePath = String.IsNullOrEmpty(txtImage.Text) ? null : Path.Combine(_studentReadService.FilePath, txtImage.Text);
+
+            if (_studentId > 0)
+            {
+                await UpdateAsync(firstName, lastName, gender, courseId, agree, dob, hobbyIds, imagePath);
+            }
+            else
+            {
+                await SaveAsync(firstName, lastName, gender, courseId, agree, dob, hobbyIds, imagePath);
+            }
+        }
+
+        private async Task SaveAsync(string firstName, string lastName, bool gender, int courseId, bool agree, string dob, List<int> hobbyIds, string imagePath)
+        {
             {
                 //StudentService studentService = new StudentService();
                 var student = new StudentCreateDto     //just property ma save garna lai object banako
@@ -306,28 +319,44 @@ namespace WinFormsApp1
                     Profile = imagePath,
                     HobbyIds = hobbyIds
                 };
-                if (_studentId > 0)
-                {
-                    // student.Id = _studentId;
-                    //await _studentWriteService.UpdateAsync(student);
-                }
-                else
-                {
-                    var result = await _studentWriteService.SaveAsync(student);
-                    if (result.Status == Status.Success)
-                    {
-                        await OnSuccessAsync(imagePath);
-                    }
-                    else
-                    {
-                        DialogBox.FailureAlert(result);
-                        txtFirstName.Focus();
-                    }
-                }
-            }
-        }  // student ko info save gareko so that json ma save garauma
 
-        private async Task OnSuccessAsync(string imagePath)
+                var result = await _studentWriteService.SaveAsync(student);
+                await HandleResultAsync(imagePath, result);
+            }
+        }
+
+        private async Task HandleResultAsync(string imagePath, OutputDto result)
+        {
+            if (result.Status == Status.Success)
+            {
+                await OnSuccessAsync(result.Message, imagePath);
+            }
+            else
+            {
+                DialogBox.FailureAlert(result);
+                txtFirstName.Focus();
+            }
+        }
+
+        private async Task UpdateAsync(string firstName, string lastName, bool gender, int courseId, bool agree, string dob, List<int> hobbyIds, string imagePath)
+        {
+            var student = new StudentUpdateDto
+            {
+                Id = _studentId,
+                FirstName = firstName,
+                LastName = lastName,
+                Gender = gender,
+                Agree = agree,
+                CourseId = courseId,
+                DOB = String.IsNullOrEmpty(dob) ? null : dtpDOB.Value,
+                Profile = imagePath,
+                HobbyIds = hobbyIds
+            };
+            var result = await _studentWriteService.UpdateAsync(student);
+            await HandleResultAsync(imagePath, result);
+        }
+
+        private async Task OnSuccessAsync(string message, string imagePath)
         {
             if (!String.IsNullOrEmpty(_uploadedFile) && !String.IsNullOrEmpty(txtImage.Text))
             {
@@ -335,7 +364,7 @@ namespace WinFormsApp1
             }
 
             await LoadStudentsAsync();
-            DialogBox.SuccessAlert("Saved Successfully", "Success");
+            DialogBox.SuccessAlert(message);
             ResetControls();
         }
 
@@ -538,6 +567,7 @@ namespace WinFormsApp1
                     }
                     chkAgree.Checked = student.Agree;
                 }
+                txtFirstName.Focus();
             }
         }
     }

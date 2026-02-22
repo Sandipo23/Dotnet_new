@@ -1,5 +1,5 @@
 ﻿using InputFormEF.DAL.Data;
-using InputFormEF.DAL.Dto;
+
 using InputFormEF.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
@@ -65,19 +65,20 @@ namespace InputFormEF.DAL
                                         .Students
                                         .Include(x => x.StudentHobbies)
                                         .FirstOrDefaultAsync(x => x.Id == student.Id);
-            if (existingStudent != null)
+            if (existingStudent == null)
             {
-                existingStudent.FirstName = student.FirstName;
-                existingStudent.LastName = student.LastName;
-                existingStudent.Gender = student.Gender;
-                existingStudent.Agree = student.Agree;
-                existingStudent.DOB = student.DOB;
-                existingStudent.CourseId = student.CourseId;
-                existingStudent.Profile = student.Profile;
-                existingStudent.StudentHobbies.Clear();
-                existingStudent.StudentHobbies.AddRange(student.StudentHobbies);
-                await _context.SaveChangesAsync();
+                throw new NullReferenceException($"Invalid student id {student.Id}");
             }
+            existingStudent.FirstName = student.FirstName;
+            existingStudent.LastName = student.LastName;
+            existingStudent.Gender = student.Gender;
+            existingStudent.Agree = student.Agree;
+            existingStudent.DOB = student.DOB;
+            existingStudent.CourseId = student.CourseId;
+            existingStudent.Profile = student.Profile;
+            existingStudent.StudentHobbies.Clear();
+            existingStudent.StudentHobbies.AddRange(student.StudentHobbies);
+            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int studentId)

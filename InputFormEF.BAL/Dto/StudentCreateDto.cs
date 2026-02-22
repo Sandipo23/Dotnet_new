@@ -13,7 +13,7 @@ namespace InputFormEF.BAL.Dto
         public bool Gender { get; set; }
         public bool Agree { get; set; }
         public int CourseId { get; set; }
-        public DateTime DOB { get; set; }
+        public DateTime? DOB { get; set; }
         public string Profile { get; set; }
         public List<int> HobbyIds { get; set; }
 
