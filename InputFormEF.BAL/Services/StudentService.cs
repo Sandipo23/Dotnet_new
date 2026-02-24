@@ -21,9 +21,11 @@ namespace InputFormEF.BAL.Services
         private readonly IConfiguration _configuration;
         private readonly IValidator<StudentCreateDto> _studentCreateValidator;
         private readonly IValidator<StudentUpdateDto> _studentUpdateValidator;
+        private readonly IValidator<SaveImageRequest> _saveImageRequestValidator;
 
         public StudentService(IStudentReadRepository studentReadRepository, IStudentWriteRepository studentWriteRepository,
-            IConfiguration configuration, IValidator<StudentCreateDto> studentCreateValidator, IValidator<StudentUpdateDto> studentUpdateValidator)
+            IConfiguration configuration, IValidator<StudentCreateDto> studentCreateValidator, IValidator<StudentUpdateDto> studentUpdateValidator
+            , IValidator<SaveImageRequest> saveImageRequestValidator)
         {
             // _folderLocation = ConfigurationManager.AppSettings["FolderLocation"];
             _configuration = configuration;
@@ -32,6 +34,7 @@ namespace InputFormEF.BAL.Services
             _studentWriteRepository = studentWriteRepository;
             _studentCreateValidator = studentCreateValidator;
             _studentUpdateValidator = studentUpdateValidator;
+            _saveImageRequestValidator = saveImageRequestValidator;
 
             path = Path.Combine(FilePath, "student.json");
         }
@@ -108,9 +111,40 @@ namespace InputFormEF.BAL.Services
         //     await _studentWriteRepository.SaveAsync(student);
         //  }
 
-        public void SaveImage(string source, string destination)
+        public async Task<OutputDto> SaveImageAsync(SaveImageRequest request)
         {
-            File.Copy(source, destination, true);
+            try
+            {
+                var validationResult = await _saveImageRequestValidator.ValidateAsync(request);
+                if (!validationResult.IsValid)
+                {
+                    return new OutputDto
+                    {
+                        Status = Status.Failed,
+                        Message = Message.Failed,
+                        ValidationResult = validationResult
+                    };
+                }
+
+                if (!String.IsNullOrEmpty(request.Source) && !String.IsNullOrEmpty(request.Destination))
+                {
+                    File.Copy(request.Source, request.Destination, true);
+                }
+                return new OutputDto
+                {
+                    Status = Status.Success,
+                    Message = "Uploaded Successfully",
+                };
+            }
+            catch (Exception ex)
+            {
+                return new OutputDto
+                {
+                    Status = Status.Failed,
+                    Message = Message.Failed,
+                    Error = ex.Message
+                };
+            }
         }
 
         public async Task<OutputDto> UpdateAsync(StudentUpdateDto request)
@@ -121,7 +155,7 @@ namespace InputFormEF.BAL.Services
                 if (!validationResult.IsValid)
                 {
                     return new OutputDto
-                    {
+                    {// if validation is failed then do this
                         Status = Status.Failed,
                         Message = Message.Failed,
                         ValidationResult = validationResult
@@ -154,7 +188,7 @@ namespace InputFormEF.BAL.Services
                 };
             }
             catch (Exception ex)
-            {
+            {// if exception is found then we return this code
                 return new OutputDto
                 {
                     Status = Status.Failed,
@@ -164,9 +198,36 @@ namespace InputFormEF.BAL.Services
             }
         }
 
-        public async Task DeleteAsync(int studentId)
+        public async Task<OutputDto> DeleteAsync(int studentId)
         {
-            await _studentWriteRepository.DeleteAsync(studentId);
+            try
+
+            {
+                if (studentId <= 0)
+                {
+                    return new OutputDto
+                    {
+                        Status = Status.Failed,
+                        Message = Message.Failed,
+                        Error = "Id is required."
+                    };
+                }
+                await _studentWriteRepository.DeleteAsync(studentId);
+                return new OutputDto
+                {
+                    Status = Status.Success,
+                    Message = "Deleted Successfully",
+                };
+            }
+            catch (Exception ex)
+            {
+                return new OutputDto
+                {
+                    Status = Status.Failed,
+                    Message = Message.Failed,
+                    Error = ex.Message
+                };
+            }
         }
 
         #endregion Write

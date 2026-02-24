@@ -358,14 +358,24 @@ namespace WinFormsApp1
 
         private async Task OnSuccessAsync(string message, string imagePath)
         {
-            if (!String.IsNullOrEmpty(_uploadedFile) && !String.IsNullOrEmpty(txtImage.Text))
+            var request = new SaveImageRequest
             {
-                _studentWriteService.SaveImage(_uploadedFile, imagePath);
-            }
+                Source = _uploadedFile,
+                Destination = imagePath
+            };
+            // if (!String.IsNullOrEmpty(_uploadedFile) && !String.IsNullOrEmpty(txtImage.Text))// == this is alredy donr in bal so not necessary
+            //   {
+            //      _studentWriteService.SaveImageAsync(_uploadedFile, imagePath);
+            //  }
+            var result = await _studentWriteService.SaveImageAsync(request);
 
             await LoadStudentsAsync();
             DialogBox.SuccessAlert(message);
             ResetControls();
+            if (result.Status == Status.Failed)
+            {
+                DialogBox.FailureAlert(result);
+            }
         }
 
         private void ResetControls()

@@ -13,10 +13,11 @@ namespace InputFormEF.BAL.Interfaces
     {
         Task<OutputDto> SaveAsync(StudentCreateDto request);
 
-        void SaveImage(string source, string destination);
+        //  void SaveImage(string source, string destination);
+        Task<OutputDto> SaveImageAsync(SaveImageRequest request);
 
         Task<OutputDto> UpdateAsync(StudentUpdateDto request);
 
-        Task DeleteAsync(int studentId);
+        Task<OutputDto> DeleteAsync(int studentId);
     }
 }
