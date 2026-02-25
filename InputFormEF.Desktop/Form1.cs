@@ -270,7 +270,7 @@ namespace WinFormsApp1
             ResetControls();
         }
 
-        private async Task SaveUpdateAsync()
+        private async Task SaveUpdateAsync(bool isUpdate = false)
         {
             string firstName = txtFirstName.Text.Trim();
             string lastName = txtLastName.Text.Trim();
@@ -294,7 +294,7 @@ namespace WinFormsApp1
             //string imagePath = Path.Combine(_studentService._folderLocation, txtImage.Text);  // to store and retreive the image path
             string imagePath = String.IsNullOrEmpty(txtImage.Text) ? null : Path.Combine(_studentReadService.FilePath, txtImage.Text);
 
-            if (_studentId > 0)
+            if (isUpdate)
             {
                 await UpdateAsync(firstName, lastName, gender, courseId, agree, dob, hobbyIds, imagePath);
             }
@@ -504,33 +504,25 @@ namespace WinFormsApp1
         private async void btnUpdate_Click(object sender, EventArgs e)
         {
             btnSave.Enabled = true;
-            if (_studentId > 0)
-            {
-                // Update
-                await SaveUpdateAsync();
-            }
-            else
-            {
-                MessageBox.Show("Please select a student to update.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ResetControls();
-            }
+            await SaveUpdateAsync(true);
         }
 
         private async void btnDelete_ClickAsync(object sender, EventArgs e)
         {
             btnSave.Enabled = true;
-            if (_studentId > 0)
+            var result = await _studentWriteService.DeleteAsync(_studentId);
+            if (result.Status == Status.Success)
             {
                 // Delete
-                await _studentWriteService.DeleteAsync(_studentId);
+
                 await LoadStudentsAsync();
-                MessageBox.Show("Deleted Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogBox.SuccessAlert(result.Message);
+                ResetControls();
             }
             else
             {
-                MessageBox.Show("Please select a student to delete.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogBox.FailureAlert(result);
             }
-            ResetControls();
         }
 
         private async void dgvStudents_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -576,9 +568,26 @@ namespace WinFormsApp1
                         lbHobbies.SetItemChecked(index, true);
                     }
                     chkAgree.Checked = student.Agree;
+                    // this is the code to show image in the form but if no image then cannot proceed
+                    if (System.IO.File.Exists(student.Profile))
+                    {
+                        pbStudent.Image = Image.FromFile(student.Profile);
+                    }
+                    else
+                    {
+                        pbStudent.Image = null;
+                    }
                 }
                 txtFirstName.Focus();
             }
+        }
+
+        private void dgvStudents_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+        }
+
+        private void pbStudent_Click(object sender, EventArgs e)
+        {
         }
     }
 }

@@ -4,6 +4,7 @@ using InputFormEF.BAL.ApplicationConstant;
 using InputFormEF.BAL.Dto;
 using InputFormEF.BAL.Enums;
 using InputFormEF.BAL.Interfaces;
+using InputFormEF.BAL.Utilities;
 using InputFormEF.DAL;
 
 using InputFormEF.DAL.Entities;
@@ -22,6 +23,7 @@ namespace InputFormEF.BAL.Services
         private readonly IValidator<StudentCreateDto> _studentCreateValidator;
         private readonly IValidator<StudentUpdateDto> _studentUpdateValidator;
         private readonly IValidator<SaveImageRequest> _saveImageRequestValidator;
+        private const string _module = "Student";
 
         public StudentService(IStudentReadRepository studentReadRepository, IStudentWriteRepository studentWriteRepository,
             IConfiguration configuration, IValidator<StudentCreateDto> studentCreateValidator, IValidator<StudentUpdateDto> studentUpdateValidator
@@ -78,6 +80,7 @@ namespace InputFormEF.BAL.Services
             {
                 var validationResult = await _studentCreateValidator.ValidateAsync(request);
                 if (!validationResult.IsValid)
+
                     return OutputDtoConverter.SetFailed(validationResult);
 
                 var student = new Student
@@ -98,7 +101,7 @@ namespace InputFormEF.BAL.Services
                                      .ToList(),
                 };
                 await _studentWriteRepository.SaveAsync(student);
-                return OutputDtoConverter.SetSuccess(_module, Operation.Save);
+                return OutputDtoConverter.SetSuccess(_module, ApplicationConstant.Operation.Save);
             }
             catch (Exception ex)
             {
@@ -117,33 +120,17 @@ namespace InputFormEF.BAL.Services
             {
                 var validationResult = await _saveImageRequestValidator.ValidateAsync(request);
                 if (!validationResult.IsValid)
-                {
-                    return new OutputDto
-                    {
-                        Status = Status.Failed,
-                        Message = Message.Failed,
-                        ValidationResult = validationResult
-                    };
-                }
+                    return OutputDtoConverter.SetFailed(validationResult);
 
                 if (!String.IsNullOrEmpty(request.Source) && !String.IsNullOrEmpty(request.Destination))
                 {
                     File.Copy(request.Source, request.Destination, true);
                 }
-                return new OutputDto
-                {
-                    Status = Status.Success,
-                    Message = "Uploaded Successfully",
-                };
+                return OutputDtoConverter.SetSuccess(_module, ApplicationConstant.Operation.Save);
             }
             catch (Exception ex)
             {
-                return new OutputDto
-                {
-                    Status = Status.Failed,
-                    Message = Message.Failed,
-                    Error = ex.Message
-                };
+                return OutputDtoConverter.SetFailed(ex.Message);
             }
         }
 
@@ -153,14 +140,7 @@ namespace InputFormEF.BAL.Services
             {
                 var validationResult = await _studentUpdateValidator.ValidateAsync(request);
                 if (!validationResult.IsValid)
-                {
-                    return new OutputDto
-                    {// if validation is failed then do this
-                        Status = Status.Failed,
-                        Message = Message.Failed,
-                        ValidationResult = validationResult
-                    };
-                }
+                    return OutputDtoConverter.SetFailed(validationResult);
 
                 var student = new Student
                 {
@@ -181,20 +161,11 @@ namespace InputFormEF.BAL.Services
                                      .ToList(),
                 };
                 await _studentWriteRepository.UpdateAsync(student);
-                return new OutputDto
-                {
-                    Status = Status.Success,
-                    Message = "Updated Successfully",
-                };
+                return OutputDtoConverter.SetSuccess(_module, ApplicationConstant.Operation.Update);
             }
             catch (Exception ex)
             {// if exception is found then we return this code
-                return new OutputDto
-                {
-                    Status = Status.Failed,
-                    Message = Message.Failed,
-                    Error = ex.Message
-                };
+                return OutputDtoConverter.SetFailed(ex.Message);
             }
         }
 
@@ -204,29 +175,13 @@ namespace InputFormEF.BAL.Services
 
             {
                 if (studentId <= 0)
-                {
-                    return new OutputDto
-                    {
-                        Status = Status.Failed,
-                        Message = Message.Failed,
-                        Error = "Id is required."
-                    };
-                }
+                    return OutputDtoConverter.SetFailed("Id is required.");
                 await _studentWriteRepository.DeleteAsync(studentId);
-                return new OutputDto
-                {
-                    Status = Status.Success,
-                    Message = "Deleted Successfully",
-                };
+                return OutputDtoConverter.SetSuccess(_module, ApplicationConstant.Operation.Delete);
             }
             catch (Exception ex)
             {
-                return new OutputDto
-                {
-                    Status = Status.Failed,
-                    Message = Message.Failed,
-                    Error = ex.Message
-                };
+                return OutputDtoConverter.SetFailed(ex.Message);
             }
         }
 

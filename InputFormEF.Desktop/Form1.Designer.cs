@@ -270,6 +270,7 @@
             pbStudent.Size = new Size(143, 124);
             pbStudent.TabIndex = 1025;
             pbStudent.TabStop = false;
+          //  pbStudent.Click += pbStudent_Click;
             // 
             // btnUpload
             // 
@@ -312,6 +313,7 @@
             dgvStudents.ReadOnly = true;
             dgvStudents.Size = new Size(829, 238);
             dgvStudents.TabIndex = 1029;
+            //dgvStudents.CellContentClick += dgvStudents_CellContentClick;
             dgvStudents.CellDoubleClick += dgvStudents_CellDoubleClick;
             // 
             // lblDOBError
