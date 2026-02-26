@@ -14,6 +14,7 @@ namespace InputFormEF.BAL.Utilities
 {
     public static class OutputDtoConverter
     {
+        //for write
         public static OutputDto SetSuccess(string module, string operation)
         {
             string[] operations = { ApplicationConstant.Operation.Save, ApplicationConstant.Operation.Update, ApplicationConstant.Operation.Delete };
@@ -28,6 +29,17 @@ namespace InputFormEF.BAL.Utilities
             {
                 Status = Status.Success,
                 Message = $"{module} {operation} successfully.",
+            };
+        }
+
+        //for reading
+        public static OutputDto<T> SetSuccess<T>(T data)
+        {
+            return new OutputDto<T>
+            {
+                Status = Status.Success,
+                Message = Message.Success,
+                Data = data
             };
         }
 
@@ -48,6 +60,30 @@ namespace InputFormEF.BAL.Utilities
                 Status = Status.Failed,
                 Message = Message.Failed,
                 ValidationResult = validationResult
+            };
+        }
+
+        //for reading
+        public static OutputDto<T> SetFailed<T>(string error, T data)
+        {
+            return new OutputDto<T>
+            {
+                Status = Status.Failed,
+                Message = Message.Failed,
+                Error = error,
+                Data = data
+            };
+        }
+
+        // for reading
+        public static OutputDto<T> SetFailed<T>(ValidationResult validationResult, T data)
+        {
+            return new OutputDto<T>
+            {
+                Status = Status.Failed,
+                Message = Message.Failed,
+                ValidationResult = validationResult,
+                Data = data
             };
         }
     }

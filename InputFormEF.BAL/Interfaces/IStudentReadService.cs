@@ -14,12 +14,12 @@ namespace InputFormEF.BAL.Interfaces
     {
         string FilePath { get; }
 
-        Task<List<Course>> GetAllCoursesAsync();
+        Task<OutputDto<List<Course>>> GetAllCoursesAsync();
 
-        Task<List<Hobby>> GetAllHobbiesAsync();
+        Task<OutputDto<List<Hobby>>> GetAllHobbiesAsync();
 
-        Task<List<StudentReadDto>> GetAllAsync();
+        Task<OutputDto<List<StudentReadDto>>> GetAllAsync();
 
-        Task<Student> GetByIdAsync(int id);
+        Task<OutputDto<Student>> GetByIdAsync(int id);
     }
 }

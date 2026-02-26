@@ -45,11 +45,14 @@ namespace WinFormsApp1
 
         private async Task LoadHobbiesAsync()
         {
-            var hobbies = await _studentReadService.GetAllHobbiesAsync();
-            lbHobbies.DataSource = hobbies;
-            lbHobbies.DisplayMember = nameof(Course.Name);
-            lbHobbies.ValueMember = nameof(Course.Id);
-            //   lbHobbies.Items.AddRange(hobbies);   this is previous code loading from hobbies list
+            var result = await _studentReadService.GetAllHobbiesAsync();
+            if (result.Status == Status.Success)
+            {
+                var hobbies = result.Data;
+                lbHobbies.DataSource = hobbies;
+                lbHobbies.DisplayMember = nameof(Course.Name);
+                lbHobbies.ValueMember = nameof(Course.Id);
+            }   //   lbHobbies.Items.AddRange(hobbies);   this is previous code loading from hobbies list
         }
 
         private async Task LoadStudentsGridAsync()
@@ -126,15 +129,15 @@ namespace WinFormsApp1
 
         private async Task LoadStudentsAsync()
         {
-            //var students = _studentService.GetAll();
-            //if (students.Count > 0)
-            //{
-            //    dgvStudents.DataSource = students;
-            //}
-            _students = await _studentReadService.GetAllAsync();
-            if (_students.Count > 0)
+            dgvStudents.DataSource = null;  //resets grid
+            var result = await _studentReadService.GetAllAsync();
+            if (result.Status == Status.Success)
             {
-                dgvStudents.DataSource = _students;
+                _students = result.Data;
+                if (_students.Count > 0)
+                {
+                    dgvStudents.DataSource = _students;
+                }
             }
         }
 
@@ -195,16 +198,33 @@ namespace WinFormsApp1
             //cmbCourse.Items.Add("BBA");
 
             // var studentService = new StudentService();   // object of class StudentService is made
-            var courses = await _studentReadService.GetAllCoursesAsync();  // the return in the class StudentServide will return in GetAllCourses and stores the items in courses
+            List<Course> courses;     //Creates a variable to hold the list of courses.
+            var result = await _studentReadService.GetAllCoursesAsync();  // Calls service layer to get all courses.
+                                                                          // the return in the class StudentServide will return in GetAllCourses and stores the items in courses
 
-            courses.Insert(0, new Course
+            if (result.Status == Status.Success)
             {
-                Id = 0,
-                Name = "Please select a course"
-            });
+                courses = result.Data;      //If the service call succeeds, assign the returned list of courses to courses
+                courses.Insert(0, new Course
+                {
+                    Id = 0,
+                    Name = "Please select a course"
+                });
+            }
+            else
+            {
+                courses = new List<Course>    //If the call failed - creates a new list with only the placeholder course
+                {
+                   new Course {
+                        Id = 0,
+                        Name = "Please select a course"
+                   }
+                };
+            }
             cmbCourse.DataSource = courses;
             cmbCourse.DisplayMember = nameof(Course.Name);
             cmbCourse.ValueMember = nameof(Course.Id);
+            cmbCourse.SelectedIndex = 0;
         }
 
         private void txtFirstName_TextChanged(object sender, EventArgs e)
@@ -536,49 +556,54 @@ namespace WinFormsApp1
                 btnSave.Enabled = false;
                 //  button1.Enabled = false;
                 button2.Enabled = false;
-                var student = await _studentReadService.GetByIdAsync(_studentId);
-                if (student != null)
+                var result = await _studentReadService.GetByIdAsync(_studentId);
+                if (result.Status == Status.Success)
                 {
                     btnSave.Enabled = false;
                     button1.Enabled = false;
                     button2.Enabled = false;
-                    txtFirstName.Text = student.FirstName;
-                    txtLastName.Text = student.LastName;
-                    if (student.Gender)
-                    {
-                        rbMale.Checked = true;
-                    }
-                    else
-                    {
-                        rbFemale.Checked = true;
-                    }
+                    var student = result.Data;
+                    if (student != null)
 
-                    cmbCourse.Text = student.Course.Name;
-                    dtpDOB.CustomFormat = Constants.Format;
-                    dtpDOB.Value = student.DOB;
-                    ResetHobbies();
-                    for (int i = 0; i < student.StudentHobbies.Count; i++)
                     {
-                        int hobbyId = student.StudentHobbies[i].HobbyId;
-                        var hobby = lbHobbies
-                                   .Items
-                                   .Cast<Hobby>()
-                                   .FirstOrDefault(x => x.Id == hobbyId);
-                        int index = lbHobbies.Items.IndexOf(hobby);
-                        lbHobbies.SetItemChecked(index, true);
+                        txtFirstName.Text = student.FirstName;
+                        txtLastName.Text = student.LastName;
+                        if (student.Gender)
+                        {
+                            rbMale.Checked = true;
+                        }
+                        else
+                        {
+                            rbFemale.Checked = true;
+                        }
+
+                        cmbCourse.Text = student.Course.Name;
+                        dtpDOB.CustomFormat = Constants.Format;
+                        dtpDOB.Value = student.DOB;
+                        ResetHobbies();
+                        for (int i = 0; i < student.StudentHobbies.Count; i++)
+                        {
+                            int hobbyId = student.StudentHobbies[i].HobbyId;
+                            var hobby = lbHobbies
+                                       .Items
+                                       .Cast<Hobby>()
+                                       .FirstOrDefault(x => x.Id == hobbyId);
+                            int index = lbHobbies.Items.IndexOf(hobby);
+                            lbHobbies.SetItemChecked(index, true);
+                        }
+                        chkAgree.Checked = student.Agree;
+                        // this is the code to show image in the form but if no image then cannot proceed
+                        if (System.IO.File.Exists(student.Profile))
+                        {
+                            pbStudent.Image = Image.FromFile(student.Profile);
+                        }
+                        else
+                        {
+                            pbStudent.Image = null;
+                        }
                     }
-                    chkAgree.Checked = student.Agree;
-                    // this is the code to show image in the form but if no image then cannot proceed
-                    if (System.IO.File.Exists(student.Profile))
-                    {
-                        pbStudent.Image = Image.FromFile(student.Profile);
-                    }
-                    else
-                    {
-                        pbStudent.Image = null;
-                    }
+                    txtFirstName.Focus();
                 }
-                txtFirstName.Focus();
             }
         }
 

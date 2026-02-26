@@ -51,23 +51,44 @@ namespace InputFormEF.BAL.Services
             }
         }
 
-        public async Task<List<StudentReadDto>> GetAllAsync()
+        public async Task<OutputDto<List<StudentReadDto>>> GetAllAsync()
         {
-            var result = await _studentReadRepository.GetAllAsync();
-            var students = StudentUtility.ConvertToStudentRead(result);
-            return students;
+            try
+            {
+                var result = await _studentReadRepository.GetAllAsync();
+                var students = StudentUtility.ConvertToStudentRead(result);
+                return OutputDtoConverter.SetSuccess(students);
+            }
+            catch (Exception ex)
+            {
+                return OutputDtoConverter.SetFailed(ex.Message, new List<StudentReadDto>());
+            }
         }
 
-        public async Task<List<Course>> GetAllCoursesAsync()
+        public async Task<OutputDto<List<Course>>> GetAllCoursesAsync()
         {
-            var courses = await _studentReadRepository.GetAllCoursesAsync();
-            return courses;
+            try
+            {
+                var courses = await _studentReadRepository.GetAllCoursesAsync();
+                return OutputDtoConverter.SetSuccess(courses);
+            }
+            catch (Exception ex)
+            {
+                return OutputDtoConverter.SetFailed(ex.Message, new List<Course>());
+            }
         }
 
-        public async Task<List<Hobby>> GetAllHobbiesAsync()
+        public async Task<OutputDto<List<Hobby>>> GetAllHobbiesAsync()
         {
-            var hobbies = await _studentReadRepository.GetAllHobbiesAsync();
-            return hobbies;
+            try
+            {
+                var hobbies = await _studentReadRepository.GetAllHobbiesAsync();
+                return OutputDtoConverter.SetSuccess(hobbies);
+            }
+            catch (Exception ex)
+            {
+                return OutputDtoConverter.SetFailed(ex.Message, new List<Hobby>());
+            }
         }
 
         #endregion Read
@@ -187,10 +208,17 @@ namespace InputFormEF.BAL.Services
 
         #endregion Write
 
-        public async Task<Student> GetByIdAsync(int id)
+        public async Task<OutputDto<Student>> GetByIdAsync(int id)
         {
-            var student = await _studentReadRepository.GetByIdAsync(id);
-            return student;
+            try
+            {
+                var student = await _studentReadRepository.GetByIdAsync(id);
+                return OutputDtoConverter.SetSuccess(student);
+            }
+            catch (Exception ex)
+            {
+                return OutputDtoConverter.SetFailed<Student>(ex.Message, null);
+            }
         }
     }
 }

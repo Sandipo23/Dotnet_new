@@ -16,4 +16,9 @@ namespace InputFormEF.BAL.Dto
         public ValidationResult ValidationResult { get; set; }
         public string Error { get; set; }
     }
+
+    public class OutputDto<T> : OutputDto
+    {
+        public T Data { get; set; }
+    }
 }
