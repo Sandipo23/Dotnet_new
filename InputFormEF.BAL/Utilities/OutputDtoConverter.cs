@@ -14,6 +14,17 @@ namespace InputFormEF.BAL.Utilities
 {
     public static class OutputDtoConverter
     {
+        // for login
+
+        public static OutputDto SetSuccess()
+        {
+            return new OutputDto
+            {
+                Status = Status.Success,
+                Message = Message.Success
+            };
+        }
+
         //for write
         public static OutputDto SetSuccess(string module, string operation)
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InputFormEF.BAL.Dto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace InputFormEF.BAL.Interfaces
 {
     public interface ILoginService
     {
-        Task<bool> LoginAsync(string userName, string password);
+        Task<OutputDto> LoginAsync(LoginRequestDto request);
     }
 }

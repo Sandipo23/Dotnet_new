@@ -1,7 +1,10 @@
 ﻿using InputFormEF.BAL;
+using InputFormEF.BAL.Dto;
+using InputFormEF.BAL.Enums;
 using InputFormEF.BAL.Interfaces;
 using InputFormEF.DAL;
 using InputFormEF.Desktop;
+using InputFormEF.Desktop.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -49,13 +52,14 @@ namespace WinFormsApp1
             string userName = txtUserName.Text.Trim();
             string password = txtPassword.Text.Trim();
 
-            if (String.IsNullOrEmpty(userName) || String.IsNullOrEmpty(password))
+            var request = new LoginRequestDto
             {
-                MessageBox.Show("Username and password is required.", "Invalid Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                ResetControls();
-                return;
-            }
-            if (await _loginService.LoginAsync(userName, password))    // this is the code that returns 1/true if the username and password matches
+                UserName = userName,
+                Password = password
+            };
+            var result = await _loginService.LoginAsync(request);
+            if (result.Status == Status.Success)
+
             {
                 StudentForm studentForm = Program.ServiceProvider.GetService<StudentForm>();
                 studentForm.SetUserName(userName);
@@ -64,9 +68,8 @@ namespace WinFormsApp1
             }
             else
             {
-                MessageBox.Show("Invalid credentials.", "Invalid Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogBox.FailureAlert(result);
             }
-
             ResetControls();
         }
 

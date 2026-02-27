@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using InputFormEF.BAL.Dto;
 using InputFormEF.BAL.Interfaces;
 using InputFormEF.BAL.Services;
 using InputFormEF.BAL.Validator;
@@ -19,6 +20,7 @@ namespace InputFormEF.BAL
             services.AddScoped<IStudentReadService, StudentService>();
             services.AddScoped<IStudentWriteService, StudentService>();
             services.AddValidatorsFromAssemblyContaining<StudentCreateDtoValidator>();
+            services.AddScoped<IValidator<LoginRequestDto>, LoginRequestDtoValidator>();
         }
     }
 }
