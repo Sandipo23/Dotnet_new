@@ -16,8 +16,9 @@ namespace InputFormEF.DAL.Data
         public DbSet<Course> Courses { get; set; }
         public DbSet<Hobby> Hobbies { get; set; }
 
-        public DbSet<User> Users { get; set; }
+        //  public DbSet<User> Users { get; set; }
         public DbSet<Student> Students { get; set; }
+
         public DbSet<StudentHobby> StudentHobbies { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
